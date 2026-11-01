@@ -108,7 +108,11 @@ h1{font-family:'Juache','Pretendard',sans-serif;font-weight:400;font-size:22px;m
 .t-md{font-size:15px;fill:var(--text);font-weight:600}
 .t-blue{fill:var(--blue)}
 .t-gold{fill:var(--gold)}
-@media(max-width:700px){.t-sm{font-size:19px}.t-md{font-size:22px}}
+/* 좁은 화면에서는 그림이 40%쯤으로 줄어들어요: 글자를 키우고 보조 글자는 숨겨요 */
+@media(max-width:700px){.t-sm{font-size:26px}.t-md{font-size:30px}.mob-hide{display:none}.map svg,.ruler svg{overflow:visible}}
+/* 프로젝터·큰 화면: 화면 전체를 비율대로 키워요 */
+@media(min-width:1600px){body{zoom:1.2}}
+@media(min-width:2200px){body{zoom:1.5}}
 
 /* 관측 화면 */
 .views{display:grid;grid-template-columns:1fr minmax(160px,210px) 1fr;gap:10px;align-items:center}
@@ -314,7 +318,7 @@ summary{cursor:pointer;min-height:36px;display:flex;align-items:center}
 <script>
 (function(){
 'use strict';
-const VERSION = '1.2.0';
+const VERSION = '1.3.0';
 const $ = id => document.getElementById(id);
 const NS = 'http://www.w3.org/2000/svg';
 const MINUS = '−';
@@ -426,14 +430,14 @@ function buildMap(){
     const x = xOfD(a[0]);
     t += `<line x1="${x}" y1="94" x2="${x}" y2="108" stroke="#8c97cf" stroke-width="2"/>`;
     t += `<text x="${x}" y="126" text-anchor="middle" class="t-md">${a[1]}</text>`;
-    t += `<text x="${x}" y="144" text-anchor="middle" class="t-sm">${a[2]}</text>`;
+    t += `<text x="${x}" y="144" text-anchor="middle" class="t-sm mob-hide">${a[2]}</text>`;
   });
   t += `<line x1="310" y1="30" x2="310" y2="106" stroke="#6cc4ff" stroke-width="2" stroke-dasharray="5 4"/>`;
   t += `<text x="310" y="20" text-anchor="middle" class="t-md t-blue">10파섹 (기준 거리)</text>`;
-  t += `<text x="210" y="48" text-anchor="middle" class="t-sm">← 가까움 (m &lt; M)</text>`;
-  t += `<text x="510" y="48" text-anchor="middle" class="t-sm">멀어짐 (m &gt; M) →</text>`;
+  t += `<text x="210" y="48" text-anchor="middle" class="t-sm mob-hide">← 가까움 (m &lt; M)</text>`;
+  t += `<text x="510" y="48" text-anchor="middle" class="t-sm mob-hide">멀어짐 (m &gt; M) →</text>`;
   t += `<circle cx="48" cy="100" r="17" fill="#2f7fd6"/><path d="M38 95q6-6 12-2t3 9q-6 4-12 1z" fill="#4fcf86"/><path d="M52 108q5-2 8 2-3 4-8 1z" fill="#4fcf86"/>`;
-  t += `<text x="48" y="136" text-anchor="middle" class="t-sm">지구</text>`;
+  t += `<text x="48" y="136" text-anchor="middle" class="t-sm mob-hide">지구</text>`;
   t += `<line id="mapLine" x1="66" y1="100" x2="300" y2="100" stroke="#ffd24a" stroke-width="2" stroke-dasharray="3 5" opacity=".7"/>`;
   t += `<g id="mapStar"><polygon points="${starPoints(0,0,14,6)}" fill="#ffd24a" stroke="#fff" stroke-width="1.5"/></g>`;
   t += `<text id="mapLabel" x="300" y="76" text-anchor="middle" class="t-md t-gold"></text>`;
@@ -462,9 +466,9 @@ function buildRuler(){
   }
   const x6 = xOfM(NAKED_EYE);
   t += `<line x1="${x6}" y1="16" x2="${x6}" y2="60" stroke="#ffe9a0" stroke-width="1.5" stroke-dasharray="4 3"/>`;
-  t += `<text x="${x6 + 6}" y="12" class="t-sm" style="fill:#ffe9a0">맨눈 한계 +6</text>`;
-  t += `<text x="30" y="124" class="t-sm">← 밝음</text>`;
-  t += `<text x="770" y="124" text-anchor="end" class="t-sm">어두움 →</text>`;
+  t += `<text x="${x6 + 6}" y="12" class="t-sm mob-hide" style="fill:#ffe9a0">맨눈 한계 +6</text>`;
+  t += `<text x="30" y="124" class="t-sm mob-hide">← 밝음</text>`;
+  t += `<text x="770" y="124" text-anchor="end" class="t-sm mob-hide">어두움 →</text>`;
   t += `<line id="rSeg" x1="0" y1="60" x2="0" y2="60" stroke="#ffd24a" stroke-width="5" stroke-linecap="round" opacity=".85"/>`;
   t += `<g id="rMark"><polygon points="-8,-14 8,-14 0,0" fill="#ffd24a" transform="translate(0,56)"/><text id="rmT" y="36" text-anchor="middle" class="t-md t-gold"></text></g>`;
   t += `<g id="rMarkA"><polygon points="-8,14 8,14 0,0" fill="#6cc4ff" transform="translate(0,64)"/><text id="rMT" y="112" text-anchor="middle" class="t-md t-blue"></text></g>`;
