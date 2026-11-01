@@ -80,8 +80,11 @@ svg text{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-ser
 .top{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;padding:12px 20px;border-bottom:1px solid var(--line)}
 h1{font-family:'Juache','Pretendard',sans-serif;font-weight:400;font-size:22px;margin:0;white-space:nowrap;color:var(--gold)}
 .sub{color:var(--muted);font-size:14px}
-.copy{margin-left:auto;color:#8c97cf;font-size:12px}
-@media(max-width:700px){.copy{margin-left:0;flex-basis:100%}}
+/* 푸터: 내용이 짧아도 화면 맨 아래에 붙어요 */
+body{display:flex;flex-direction:column}
+.layout{width:100%;flex:1 0 auto}
+.foot{border-top:1px solid var(--line);padding:12px 20px calc(12px + env(safe-area-inset-bottom));text-align:center}
+.copy{color:#8c97cf;font-size:12px}
 
 /* 레이아웃 */
 .layout{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:14px;padding:14px 20px 24px;max-width:1360px;margin:0 auto}
@@ -165,9 +168,10 @@ input[type=range]:disabled{opacity:.45}
 .note{font-size:13px;color:var(--muted);margin:6px 0 0;min-height:20px}
 
 /* 오른쪽 패널 */
-.tabs{display:flex;border-bottom:1px solid var(--line)}
-.tab{flex:1;min-height:48px;background:transparent;border:0;border-bottom:3px solid transparent;color:var(--muted);font-size:15px;font-weight:600;cursor:pointer}
-.tab[aria-selected=true]{color:var(--gold);border-bottom-color:var(--gold)}
+.tabs{display:flex;gap:4px;padding:8px 8px 10px;border-bottom:1px solid var(--line)}
+.tab{flex:1;min-height:44px;padding:0 6px;background:transparent;border:0;border-radius:10px;color:var(--muted);font-size:15px;font-weight:600;cursor:pointer}
+.tab:hover{color:var(--text)}
+.tab[aria-selected=true]{color:var(--gold);background:var(--panel2);box-shadow:inset 0 -3px 0 var(--gold)}
 .panel{padding:14px}
 .panel h3{margin:0 0 8px;font-size:17px}
 .panel p{margin:6px 0}
@@ -217,7 +221,6 @@ summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
 <header class="top">
   <h1>별의 밝기 가상실험실</h1>
   <div class="sub">중2 과학 · 별과 우주 — 겉보기 등급과 절대 등급</div>
-  <div class="copy" id="copy"></div>
 </header>
 
 <main class="layout">
@@ -316,10 +319,12 @@ summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
   </aside>
 </main>
 
+<footer class="foot"><div class="copy" id="copy"></div></footer>
+
 <script>
 (function(){
 'use strict';
-const VERSION = '1.5.0';
+const VERSION = '1.6.0';
 const $ = id => document.getElementById(id);
 const NS = 'http://www.w3.org/2000/svg';
 const MINUS = '−';
