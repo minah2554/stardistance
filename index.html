@@ -239,6 +239,17 @@ summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
 .fb .hint{display:block;margin-top:4px;color:var(--muted)}
 .fb .exp{display:block;margin-top:6px;padding:10px 12px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);color:var(--text)}
 .qactions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.why{margin-top:8px;padding:12px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);color:var(--text)}
+.why .wtitle{font-weight:700;color:var(--gold);margin-bottom:8px}
+.ineq{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:8px}
+.ineq span{padding:6px 4px;border-radius:8px;border:1px solid var(--line);text-align:center;font-size:13px;color:var(--muted);line-height:1.35}
+.ineq span b{display:block;font-size:15px}
+.ineq span.on{border-color:var(--gold);background:#3a3470;color:var(--text)}
+.wrow + .wrow{margin-top:8px;padding-top:8px;border-top:1px solid var(--line)}
+.wname{font-weight:700;margin-bottom:2px}
+.why ol{margin:0;padding-left:20px}
+.why li{margin:4px 0;font-size:15px}
+.why .wk{display:inline-block;min-width:3.6em;font-size:13px;color:var(--muted)}
 .result{text-align:center;padding:8px 0}
 .result .score{font-size:34px;font-weight:800;color:var(--gold)}
 .result ul{list-style:none;padding:0;margin:10px 0;text-align:left}
@@ -356,18 +367,15 @@ summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
       <div class="card2"><b>겉보기 등급 (m)</b> : 지구에서 <b>눈으로 본 밝기</b>예요. 별이 멀수록 어둡게 보여요.</div>
       <div class="card2"><span class="bb" style="font-weight:700">절대 등급 (M)</span> : 모든 별을 <b>10파섹(32.6광년)</b> 거리에 똑같이 놓았다고 가정했을 때의 밝기예요. 별의 <b>진짜 밝기</b>를 비교할 수 있어요.</div>
       <div class="card2"><b>거리가 10배 멀어지면?</b><br>별빛은 <b>1/100</b>로 줄고, 등급은 <b>5등급</b> 커져요(더 어두워져요).</div>
+      <div class="card2"><b>등급 차로 거리 어림하기</b><br>겉보기 등급에서 절대 등급을 빼서(m − M) <b>부등호</b>로 비교해요.<br>
+        <span class="nw">m &lt; M</span> → 10pc보다 <b>가까워요</b> · <span class="nw">m = M</span> → <b>10pc</b> · <span class="nw">m &gt; M</span> → 10pc보다 <b>멀어요</b></div>
       <table class="rel">
-        <tr><th>m − M</th><th>별의 거리</th><th>의미</th></tr>
-        <tr><td>−5</td><td>1 pc</td><td>10pc보다 가까워서 더 밝게 보여요</td></tr>
-        <tr><td>0</td><td>10 pc</td><td>m = M (기준 거리)</td></tr>
-        <tr><td>+5</td><td>100 pc</td><td>10pc보다 멀어서 100배 어두워요</td></tr>
-        <tr><td>+10</td><td>1000 pc</td><td>10000배 어두워요</td></tr>
+        <tr><th>m − M</th><th>부등호</th><th>별의 거리</th><th>의미</th></tr>
+        <tr><td>−5</td><td class="nw">m &lt; M</td><td>1 pc</td><td>10pc보다 가까워서 100배 밝게 보여요</td></tr>
+        <tr><td>0</td><td class="nw">m = M</td><td>10 pc</td><td>기준 거리</td></tr>
+        <tr><td>+5</td><td class="nw">m &gt; M</td><td>100 pc</td><td>10pc보다 멀어서 100배 어둡게 보여요</td></tr>
+        <tr><td>+10</td><td class="nw">m &gt; M</td><td>1000 pc</td><td>10000배 어둡게 보여요</td></tr>
       </table>
-      <details>
-        <summary>🔎 더 알아보기: 식으로 나타내면</summary>
-        <p>m − M = 5 log (d / 10) &nbsp;(d의 단위: 파섹)</p>
-        <p>중학교에서는 위 표처럼 <b>m − M 값으로 거리를 어림</b>하는 것으로 충분해요. 로그는 고등학교에서 배워요.</p>
-      </details>
       <p class="note">1파섹(pc) ≈ 3.26광년</p>
     </div>
   </aside>
@@ -378,7 +386,7 @@ summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
 <script>
 (function(){
 'use strict';
-const VERSION = '1.8.0';
+const VERSION = '1.9.0';
 const $ = id => document.getElementById(id);
 const NS = 'http://www.w3.org/2000/svg';
 const MINUS = '−';
@@ -742,21 +750,24 @@ const QUIZ = [
     choices:['1 pc','10 pc','100 pc','1000 pc'], answer:1,
     hints:['거리 슬라이더를 움직여서 별 A의 겉보기 등급(m)이 +5.0이 되는 곳을 찾아보세요.',
            'm과 M이 같다면 m − M = 0이에요. 표에서 m − M = 0일 때의 거리를 찾아보세요.'],
-    explain:'m − M = (+5.0) − (+5.0) = <b>0</b> → 별이 <b>10파섹</b> 거리에 있다는 뜻이에요. 절대 등급은 10파섹에서의 밝기니까, 겉보기 등급과 같다면 정확히 그 거리에 있는 거예요!' },
+    calc:[{label:'별 A', m:5, M:5}],
+    explain:'절대 등급은 10파섹에서의 밝기예요. 그래서 겉보기 등급과 절대 등급이 같다면 별은 정확히 <b>10파섹</b>에 있어요!' },
   { title:'문제 2 · 멀리 있는 밝은 별',
     text:'별 B의 <b>절대 등급은 −4.0</b>이고 <b>겉보기 등급은 +1.0</b>입니다. 별 B까지의 거리는 얼마일까요?',
     mission:{ target:1, stars:[{label:'별 B', M:-4}], text:'겉보기 등급 m이 +1.0이 되는 거리를 찾아보세요.' },
     choices:['1 pc','10 pc','100 pc','1000 pc'], answer:2,
     hints:['별 B의 겉보기 등급(m)이 +1.0이 될 때까지 거리를 바꿔 보세요.',
            'm − M = (+1.0) − (−4.0)을 계산해 보세요. 5등급 차이는 거리가 몇 배 달라졌다는 뜻일까요?'],
-    explain:'m − M = (+1.0) − (−4.0) = <b>+5.0</b> → 10파섹보다 멀어서 100배 어둡게 보이는 거예요. 거리가 10배 멀어지면 5등급 어두워지므로 별 B는 <b>100파섹</b>(약 326광년)에 있어요.' },
+    calc:[{label:'별 B', m:1, M:-4}],
+    explain:'별 B는 진짜로는 아주 밝은 별(M = −4.0)인데, 10파섹보다 훨씬 먼 <b>100파섹</b>(약 326광년)에 있어서 +1.0으로 어둡게 보이는 거예요.' },
   { title:'문제 3 · 똑같이 보이지만…',
     text:'별 가, 나, 다는 지구에서 볼 때 모두 <b>겉보기 등급이 +3.0</b>으로 똑같이 밝게 보입니다. 절대 등급이 <b>가 +8.0 / 나 +3.0 / 다 −2.0</b>일 때, <b>가장 멀리 있는 별</b>은 누구일까요?',
     mission:{ target:3, stars:[{label:'별 가', M:8},{label:'별 나', M:3},{label:'별 다', M:-2}], text:'세 별 모두 m이 +3.0이 되는 거리를 각각 찾아보세요.' },
     choices:['별 가','별 나','별 다'], answer:2,
     hints:['미션에서 별 가, 나, 다를 차례로 골라 m이 +3.0이 되는 거리를 각각 읽어 보세요.',
            '세 별의 m − M을 각각 구해 보세요: 가 = −5, 나 = 0, 다 = +5. 어느 쪽이 가장 멀까요?'],
-    explain:'m − M은 가 = <b>−5</b>(1pc), 나 = <b>0</b>(10pc), 다 = <b>+5</b>(100pc)예요. 겉보기 밝기가 같아도 <b>진짜 밝은 별(절대 등급이 작은 별)일수록 더 멀리</b> 있을 수 있어요. 가장 먼 별은 <b>별 다</b>예요.' }
+    calc:[{label:'별 가', m:3, M:8},{label:'별 나', m:3, M:3},{label:'별 다', m:3, M:-2}],
+    explain:'겉보기 밝기가 같아도 <b>진짜 밝은 별(절대 등급이 작은 별)일수록 더 멀리</b> 있을 수 있어요. 가장 먼 별은 <b>별 다</b>예요.' }
 ];
 const Q = { i:0, sel:null, tries:[0,0,0], solved:[false,false,false], first:[false,false,false], wrong:[[],[],[]], done:false };
 
@@ -793,7 +804,29 @@ function renderQuiz(loadLab){
 }
 function showExplain(){
   const q = QUIZ[Q.i];
-  $('qFb').innerHTML = `<span class="ok">⭕ 정답이에요!</span><span class="exp">${q.explain}</span>`;
+  $('qFb').innerHTML = `<span class="ok">⭕ 정답이에요!</span>${whyHTML(q.calc)}<span class="exp">${q.explain}</span>`;
+}
+// 해설: 등급 차 → 부등호 → 거리 어림 (중2 수준: 수식 없이 '5등급 차 = 밝기 100배 = 거리 10배'만 사용)
+// shortcut: 등급 차가 0 또는 ±5인 문제만 설명할 수 있어요. 다른 값의 문제를 추가하면 이 부분도 늘려야 해요.
+function whyHTML(list){
+  const sides = new Set();
+  const rows = list.map(s => {
+    const diff = s.m - s.M;
+    console.assert(diff === 0 || Math.abs(diff) === 5, 'whyHTML: 등급 차는 0 또는 ±5여야 해요', s);
+    const side = Math.sign(diff); sides.add(side);
+    const cmp = ['&lt;', '=', '&gt;'][side + 1];
+    const where = ['10pc보다 <b>가까워요</b>', '딱 <b>10pc</b>에 있어요', '10pc보다 <b>멀어요</b>'][side + 1];
+    const how = diff === 0 ? '등급 차가 없으니 거리도 기준 거리 그대로 <b>10pc</b>예요.'
+      : `5등급 차 = 밝기 100배 차 = 거리 10배 차 → 10pc ${diff > 0 ? '× 10' : '÷ 10'} = <b>${diff > 0 ? 100 : 1}pc</b>`;
+    return `<div class="wrow">${list.length > 1 ? `<div class="wname">${s.label}</div>` : ''}<ol>` +
+      `<li><span class="wk">등급 차</span> m − M = (${fmtSigned(s.m)}) − (${fmtSigned(s.M)}) = <b>${fmtSigned(diff)}</b></li>` +
+      `<li><span class="wk">부등호</span> <b class="nw">m ${cmp} M</b> → ${where}</li>` +
+      `<li><span class="wk">거리</span> ${how}</li></ol></div>`;
+  }).join('');
+  const seg = (side, html) => `<span class="${sides.has(side) ? 'on' : ''}">${html}</span>`;
+  return `<div class="why"><div class="wtitle">📏 등급 차로 거리 예측하기</div>` +
+    `<div class="ineq">${seg(-1, '<b>m &lt; M</b>10pc보다 가까움')}${seg(0, '<b>m = M</b>딱 10pc')}${seg(1, '<b>m &gt; M</b>10pc보다 멂')}</div>` +
+    rows + `</div>`;
 }
 $('pQuiz').addEventListener('click', e => {
   const t = e.target;
