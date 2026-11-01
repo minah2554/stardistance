@@ -73,6 +73,7 @@ body{
   background:radial-gradient(1200px 600px at 80% -10%,#1a2468 0%,transparent 60%),var(--bg);
 }
 button,select,input,textarea{font-family:inherit}
+button,summary,input{-webkit-tap-highlight-color:transparent}
 :focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 svg text{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-variant-numeric:tabular-nums}
 
@@ -80,6 +81,25 @@ svg text{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-ser
 .top{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;padding:12px 20px;border-bottom:1px solid var(--line)}
 h1{font-family:'Juache','Pretendard',sans-serif;font-weight:400;font-size:22px;margin:0;white-space:nowrap;color:var(--gold)}
 .sub{color:var(--muted);font-size:14px}
+/* 원리와 사용법 토글 */
+.help{margin-left:auto;align-self:center}
+.help summary{width:fit-content;gap:6px;padding:0 16px;border:1.5px solid var(--gold);border-radius:999px;color:var(--gold);font-size:14px;font-weight:600;list-style:none}
+.help summary::-webkit-details-marker{display:none}
+.help summary::after{content:'▾'}
+.help[open]{flex-basis:100%;margin-left:0}
+.help[open] summary{margin-left:auto}
+.help[open] summary::after{content:'▴'}
+.help-body{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+@media(max-width:700px){.help{margin-left:0}.help-body{grid-template-columns:1fr}}
+.help-body section{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.help-body h2{margin:0 0 8px;font-size:16px;color:var(--gold)}
+.help-body ol{margin:0;padding-left:22px}
+.help-body li{margin:8px 0;font-size:15px;line-height:1.6}
+.help-body li::marker{color:var(--muted);font-weight:700}
+.tm{color:var(--gold);font-weight:700}
+.tM{color:var(--blue);font-weight:700}
+.help-foot{display:flex;justify-content:flex-end;margin-top:10px}
+
 /* 푸터: 내용이 짧아도 화면 맨 아래에 붙어요 */
 body{display:flex;flex-direction:column}
 .layout{width:100%;flex:1 0 auto}
@@ -92,7 +112,7 @@ body{display:flex;flex-direction:column}
 .lab{display:flex;flex-direction:column;gap:12px;min-width:0}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px 14px}
 .card h2{margin:0 0 6px;font-size:15px;color:var(--muted);font-weight:600}
-.side{position:sticky;top:12px;align-self:start;max-height:calc(100vh - 24px);overflow:auto;padding:0}
+.side{position:sticky;top:12px;align-self:start;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);overflow:auto;padding:0}
 @media(max-width:1000px){.side{position:static;max-height:none}}
 
 /* 미션 배너 */
@@ -142,7 +162,7 @@ body{display:flex;flex-direction:column}
 .ctl .read{font-size:22px;font-weight:700;color:var(--gold)}
 .ctl.mctl .read{color:var(--blue)}
 .ctl .read small{font-size:13px;color:var(--muted);font-weight:500;margin-left:4px}
-input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;margin:0;touch-action:none}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;margin:0;touch-action:pan-y}
 input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(90deg,#33408f,#6b7be0)}
 input[type=range]::-moz-range-track{height:8px;border-radius:4px;background:linear-gradient(90deg,#33408f,#6b7be0)}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:var(--gold);border:3px solid #fff;margin-top:-11px;box-shadow:0 2px 6px #0008}
@@ -154,7 +174,7 @@ input[type=range]:disabled{opacity:.45}
 .ticks span{position:absolute;transform:translateX(-50%);white-space:nowrap}
 .btnrow{display:flex;gap:6px;flex-wrap:wrap}
 .btn{min-height:44px;padding:8px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--panel2);color:var(--text);font-size:15px;font-weight:600;cursor:pointer}
-.btn:hover{border-color:#5666c8}
+@media(hover:hover){.btn:hover{border-color:#5666c8}}
 .btn:active{transform:scale(.98)}
 .btn.primary{background:var(--gold);color:#201a00;border-color:var(--gold)}
 .btn.primary:disabled{opacity:.4;cursor:not-allowed}
@@ -170,7 +190,8 @@ input[type=range]:disabled{opacity:.45}
 /* 오른쪽 패널 */
 .tabs{display:flex;gap:4px;padding:8px 8px 10px;border-bottom:1px solid var(--line)}
 .tab{flex:1;min-height:44px;padding:0 6px;background:transparent;border:0;border-radius:10px;color:var(--muted);font-size:15px;font-weight:600;cursor:pointer}
-.tab:hover{color:var(--text)}
+@media(hover:hover){.tab:hover{color:var(--text)}}
+.chip:active:not(:disabled),.choice:active:not(:disabled),.tab:active{transform:scale(.97)}
 .tab[aria-selected=true]{color:var(--gold);background:var(--panel2);box-shadow:inset 0 -3px 0 var(--gold)}
 .panel{padding:14px}
 .panel h3{margin:0 0 8px;font-size:17px}
@@ -221,6 +242,32 @@ summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
 <header class="top">
   <h1>별의 밝기 가상실험실</h1>
   <div class="sub">중2 과학 · 별과 우주 — 겉보기 등급과 절대 등급</div>
+  <details class="help" id="help">
+    <summary>💡 처음이라면? 원리와 사용법</summary>
+    <div class="help-body">
+      <section>
+        <h2>🌟 원리: 별은 왜 밝기가 달라 보일까?</h2>
+        <ol>
+          <li><b>등급</b>은 별의 밝기를 나타내는 숫자예요. <b>숫자가 작을수록 밝아요.</b> 1등급 별이 6등급 별보다 밝고, −1등급은 그보다 더 밝아요. 맨눈으로는 6등급 정도까지 보여요.</li>
+          <li>별빛은 손전등 빛처럼 <b>멀리 갈수록 넓게 퍼져서</b> 어두워져요. 거리가 2배가 되면 밝기는 1/4, <b>거리가 10배가 되면 밝기는 1/100</b>이 돼요. 밝기가 100배 차이 나면 등급은 <b>5등급</b> 차이 나요.</li>
+          <li><span class="tm">겉보기 등급 m</span> : 지구에서 우리 눈에 보이는 밝기예요. 별의 진짜 밝기와 <b>거리</b>가 함께 정해요. 그래서 가까운 별은 더 밝아 보이고, 먼 별은 더 어두워 보여요.</li>
+          <li><span class="tM">절대 등급 M</span> : 모든 별을 똑같이 <b>10파섹(32.6광년)</b> 거리에 놓았다고 생각하고 잰 밝기예요. 거리가 같으니까 별의 <b>진짜 밝기</b>를 공평하게 비교할 수 있어요.</li>
+          <li>그래서 별이 10pc보다 <b>가까우면 m &lt; M</b>, <b>10pc에 있으면 m = M</b>, <b>10pc보다 멀면 m &gt; M</b>이에요.</li>
+        </ol>
+      </section>
+      <section>
+        <h2>🕹️ 사용법: 실험실은 이렇게 써요</h2>
+        <ol>
+          <li><b>① 거리 슬라이더</b>의 동그란 손잡이를 옆으로 밀거나 <b>1 · 10 · 100 · 1000 pc 버튼</b>을 눌러 별을 옮겨요.</li>
+          <li><b>② 별 버튼</b>(태양, 시리우스, 리겔, 프록시마)을 누르거나 등급 슬라이더를 밀어서 별의 진짜 밝기(M)를 정해요.</li>
+          <li>두 그림을 비교해요. <b>왼쪽</b>은 별을 10pc에 놓은 모습(<span class="tM">M</span>), <b>오른쪽</b>은 지금 거리에서 본 모습(<span class="tm">m</span>)이에요. 가운데 숫자 <b>m − M</b>을 보면 별이 10pc보다 가까운지 먼지 알 수 있어요.</li>
+          <li>그 아래 <b>등급 눈금자</b>와 <b>거리 지도</b>에서 별의 위치를 확인해요.</li>
+          <li><b>🔭 실험 가이드</b>의 체크리스트를 채운 뒤, <b>📝 문제 풀기</b>에서 <b>🔬 실험실에 별 불러오기</b>를 눌러 미션으로 문제를 풀어요.</li>
+        </ol>
+      </section>
+    </div>
+    <div class="help-foot"><button class="btn small" id="helpClose">알겠어요! 닫기</button></div>
+  </details>
 </header>
 
 <main class="layout">
@@ -324,7 +371,7 @@ summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
 <script>
 (function(){
 'use strict';
-const VERSION = '1.6.0';
+const VERSION = '1.7.0';
 const $ = id => document.getElementById(id);
 const NS = 'http://www.w3.org/2000/svg';
 const MINUS = '−';
@@ -804,6 +851,7 @@ document.querySelector('.tabs').addEventListener('keydown', e => {
   showTab(t.dataset.tab); t.focus();
 });
 $('toQuiz').addEventListener('click', () => showTab('quiz'));
+$('helpClose').addEventListener('click', () => { $('help').open = false; $('help').querySelector('summary').focus(); });
 
 /* ---------- 시작 ---------- */
 $('copy').textContent = '© 2026 MINARI STUDIO · v' + VERSION + ' · All rights reserved.';
