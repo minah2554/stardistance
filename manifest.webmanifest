@@ -1,0 +1,31 @@
+{
+  "name": "별의 밝기 가상실험실",
+  "short_name": "별 밝기 실험실",
+  "description": "중2 과학 별과 우주 — 겉보기 등급과 절대 등급 가상실험실",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "lang": "ko",
+  "theme_color": "#0a1030",
+  "background_color": "#0a1030",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

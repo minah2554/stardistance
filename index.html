@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>별의 밝기 가상실험실</title>
+<meta name="description" content="중2 과학 별과 우주 — 10파섹 기준으로 겉보기 등급과 절대 등급을 직접 실험해 보는 가상실험실">
+<meta name="theme-color" content="#0a1030">
+<meta name="apple-mobile-web-app-title" content="별의 밝기 가상실험실">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxMDFhNGYiLz48Y2lyY2xlIGN4PSIzMiIgY3k9IjMzIiByPSIyMiIgZmlsbD0iI2ZmZDI0YSIgb3BhY2l0eT0iLjE4Ii8+PHBvbHlnb24gcG9pbnRzPSIzMi4wMCwxMy44MCAzNi44OSwyNi44NyA1MC44MywyNy40OCAzOS45MSwzNi4xNyA0My42NCw0OS42MiAzMi4wMCw0MS45MiAyMC4zNiw0OS42MiAyNC4wOSwzNi4xNyAxMy4xNywyNy40OCAyNy4xMSwyNi44NyIgZmlsbD0iI2ZmZDI0YSIvPjwvc3ZnPg==">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,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">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+<style>
+@font-face {
+    font-family: 'Pretendard';
+    src: url('fonts/Pretendard-Regular.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('fonts/Pretendard-Medium.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('fonts/Pretendard-SemiBold.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('fonts/Pretendard-Bold.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('fonts/Pretendard-ExtraBold.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Juache';
+    src: url('fonts/BMJUA.woff') format('woff'),
+         url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+:root{
+  --bg:#0a1030; --panel:#131b45; --panel2:#1b2557; --line:#2b3678;
+  --text:#eef1ff; --muted:#a9b4e6; --gold:#ffd24a; --blue:#6cc4ff;
+  --green:#5be3a6; --red:#ff8a98;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;background:var(--bg);color:var(--text)}
+body{
+  font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif;
+  font-size:16px;line-height:1.5;font-variant-numeric:tabular-nums;
+  -webkit-text-size-adjust:100%;min-height:100vh;
+  background:radial-gradient(1200px 600px at 80% -10%,#1a2468 0%,transparent 60%),var(--bg);
+}
+button,select,input,textarea{font-family:inherit}
+svg text{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-variant-numeric:tabular-nums}
+
+/* 헤더 */
+.top{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;padding:12px 20px;border-bottom:1px solid var(--line)}
+h1{font-family:'Juache','Pretendard',sans-serif;font-weight:400;font-size:22px;margin:0;white-space:nowrap;color:var(--gold)}
+.sub{color:var(--muted);font-size:14px}
+.copy{margin-left:auto;color:#8c97cf;font-size:12px}
+@media(max-width:700px){.copy{margin-left:0;flex-basis:100%}}
+
+/* 레이아웃 */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:14px;padding:14px 20px 24px;max-width:1360px;margin:0 auto}
+@media(max-width:1000px){.layout{grid-template-columns:1fr;padding:10px 12px 20px}}
+.lab{display:flex;flex-direction:column;gap:12px;min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+.card h2{margin:0 0 6px;font-size:15px;color:var(--muted);font-weight:600}
+.side{position:sticky;top:12px;align-self:start;max-height:calc(100vh - 24px);overflow:auto;padding:0}
+@media(max-width:1000px){.side{position:static;max-height:none}}
+
+/* 미션 배너 */
+.mission{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;background:#2a2150;border:1.5px solid var(--gold);border-radius:14px;padding:10px 14px}
+.mission.ok{background:#12384a;border-color:var(--green)}
+.mission .mtxt{flex:1 1 260px;font-size:15px}
+.mission .mtxt b{color:var(--gold)}
+.mission.ok .mtxt b{color:var(--green)}
+.mission .mstat{flex-basis:100%;font-size:14px;color:var(--muted)}
+.mission.ok .mstat{color:#bff5dc}
+.mchips{display:flex;gap:6px;flex-wrap:wrap}
+
+/* 위치도·눈금자 */
+.map svg,.ruler svg{display:block;width:100%;height:auto}
+.t-sm{font-size:13px;fill:var(--muted)}
+.t-md{font-size:15px;fill:var(--text);font-weight:600}
+.t-blue{fill:var(--blue)}
+.t-gold{fill:var(--gold)}
+@media(max-width:700px){.t-sm{font-size:19px}.t-md{font-size:22px}}
+
+/* 관측 화면 */
+.views{display:grid;grid-template-columns:1fr minmax(160px,210px) 1fr;gap:10px;align-items:center}
+@media(max-width:700px){.views{grid-template-columns:1fr 1fr}.views .mid{grid-column:1/-1;order:3}}
+.view{margin:0;text-align:center}
+.view svg{width:100%;max-width:230px;height:auto;display:block;margin:0 auto}
+.view figcaption{margin-top:4px}
+.view .cap{font-size:13px;color:var(--muted)}
+.view .big{font-size:22px;font-weight:700}
+.view.a .big{color:var(--blue)}
+.view.b .big{color:var(--gold)}
+.viewMsg{font-size:13px;fill:#ffe9a0}
+.mid{display:flex;flex-direction:column;gap:8px}
+.tile{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:8px 10px;text-align:center}
+.tile .k{font-size:12px;color:var(--muted)}
+.tile .v{font-size:20px;font-weight:700}
+.tile .s{font-size:12px;color:var(--muted)}
+
+/* 조작부 */
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.controls{grid-template-columns:1fr}}
+.ctl h2{display:flex;justify-content:space-between;align-items:baseline}
+.ctl .read{font-size:22px;font-weight:700;color:var(--gold)}
+.ctl.mctl .read{color:var(--blue)}
+.ctl .read small{font-size:13px;color:var(--muted);font-weight:500;margin-left:4px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:36px;background:transparent;margin:0;touch-action:none}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(90deg,#33408f,#6b7be0)}
+input[type=range]::-moz-range-track{height:8px;border-radius:4px;background:linear-gradient(90deg,#33408f,#6b7be0)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:var(--gold);border:3px solid #fff;margin-top:-11px;box-shadow:0 2px 6px #0008}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--gold);border:3px solid #fff}
+#mSlider::-webkit-slider-thumb{background:var(--blue)}
+#mSlider::-moz-range-thumb{background:var(--blue)}
+input[type=range]:disabled{opacity:.45}
+.ticks{position:relative;height:18px;font-size:12px;color:var(--muted);margin:-4px 14px 6px}
+.ticks span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.btnrow{display:flex;gap:6px;flex-wrap:wrap}
+.btn{min-height:44px;padding:8px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--panel2);color:var(--text);font-size:15px;font-weight:600;cursor:pointer}
+.btn:hover{border-color:#5666c8}
+.btn:active{transform:scale(.98)}
+.btn.primary{background:var(--gold);color:#201a00;border-color:var(--gold)}
+.btn.primary:disabled{opacity:.4;cursor:not-allowed}
+.btn.ghost{background:transparent}
+.btn.small{min-height:38px;padding:4px 12px;font-size:14px}
+.chip{min-height:40px;padding:4px 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--panel2);color:var(--text);font-size:14px;font-weight:600;cursor:pointer}
+.chip small{color:var(--muted);font-weight:500;margin-left:2px}
+.chip.on{background:var(--blue);color:#06203a;border-color:var(--blue)}
+.chip.on small{color:#0a3358}
+.chip:disabled{opacity:.45;cursor:not-allowed}
+.note{font-size:13px;color:var(--muted);margin:6px 0 0;min-height:20px}
+
+/* 오른쪽 패널 */
+.tabs{display:flex;border-bottom:1px solid var(--line)}
+.tab{flex:1;min-height:48px;background:transparent;border:0;border-bottom:3px solid transparent;color:var(--muted);font-size:15px;font-weight:600;cursor:pointer}
+.tab[aria-selected=true]{color:var(--gold);border-bottom-color:var(--gold)}
+.panel{padding:14px}
+.panel h3{margin:0 0 8px;font-size:17px}
+.panel p{margin:6px 0}
+.check{list-style:none;padding:0;margin:8px 0}
+.check li{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;margin:6px 0;border-radius:12px;background:var(--panel2);border:1px solid var(--line);font-size:15px}
+.check li .bx{flex:0 0 24px;height:24px;border-radius:7px;border:2px solid #5666c8;display:grid;place-items:center;font-size:15px;color:#06203a;font-weight:800}
+.check li.done{border-color:var(--green);background:#12384a}
+.check li.done .bx{background:var(--green);border-color:var(--green)}
+.prog{font-size:13px;color:var(--muted)}
+.think{background:#2a2150;border:1px solid #5b4aa8;border-radius:12px;padding:10px 12px;margin-top:10px;font-size:14px}
+.card2{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:8px 0}
+.card2 b{color:var(--gold)}
+.card2 .bb{color:var(--blue)}
+table.rel{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+table.rel th,table.rel td{border:1px solid var(--line);padding:6px 8px;text-align:center}
+table.rel th{background:var(--panel2);color:var(--muted);font-weight:600}
+details{margin-top:10px;font-size:14px;color:var(--muted)}
+summary{cursor:pointer;min-height:36px;display:flex;align-items:center}
+
+/* 퀴즈 */
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.dots{display:flex;gap:6px}
+.dots i{width:12px;height:12px;border-radius:50%;background:var(--line);display:block}
+.dots i.cur{background:var(--gold)}
+.dots i.ok{background:var(--green)}
+.qtitle{font-size:13px;color:var(--gold);font-weight:700;margin:0}
+.qtext{font-size:16px;margin:6px 0 10px}
+.choices{display:grid;gap:8px;margin:10px 0}
+.choice{min-height:50px;text-align:left;padding:10px 14px;border-radius:12px;border:2px solid var(--line);background:var(--panel2);color:var(--text);font-size:16px;font-weight:600;cursor:pointer}
+.choice.sel{border-color:var(--gold);background:#3a3470}
+.choice.right{border-color:var(--green);background:#12384a}
+.choice.wrong{border-color:var(--red);background:#4a2030}
+.choice:disabled{cursor:default}
+.fb{min-height:24px;font-size:15px;margin:6px 0}
+.fb .ok{color:var(--green);font-weight:700}
+.fb .no{color:var(--red);font-weight:700}
+.fb .hint{display:block;margin-top:4px;color:var(--muted)}
+.fb .exp{display:block;margin-top:6px;padding:10px 12px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);color:var(--text)}
+.qactions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.result{text-align:center;padding:8px 0}
+.result .score{font-size:34px;font-weight:800;color:var(--gold)}
+.result ul{list-style:none;padding:0;margin:10px 0;text-align:left}
+.result li{padding:6px 10px;margin:4px 0;border-radius:10px;background:var(--panel2);font-size:14px}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>별의 밝기 가상실험실</h1>
+  <div class="sub">중2 과학 · 별과 우주 — 겉보기 등급과 절대 등급</div>
+  <div class="copy" id="copy"></div>
+</header>
+
+<main class="layout">
+  <section class="lab" aria-label="가상실험실">
+    <div id="mission" class="mission" hidden></div>
+
+    <div class="card views">
+      <figure class="view a">
+        <svg id="viewA" viewBox="0 0 240 240" role="img" aria-label="10파섹에서 본 별의 모습"></svg>
+        <figcaption>
+          <div class="cap">별을 <b>10파섹(32.6광년)</b>에 놓고 본 모습</div>
+          <div class="big num" id="bigM">절대 등급 M = +1.0</div>
+        </figcaption>
+      </figure>
+
+      <div class="mid">
+        <div class="tile"><div class="k">지구와의 거리 d</div><div class="v num" id="tD">-</div><div class="s num" id="tLy">-</div></div>
+        <div class="tile"><div class="k">등급 차 (m − M)</div><div class="v num" id="tDiff">-</div><div class="s" id="tDiffS">-</div></div>
+        <div class="tile"><div class="k">10파섹일 때와 비교하면</div><div class="v" id="tRatio" style="font-size:16px">-</div></div>
+      </div>
+
+      <figure class="view b">
+        <svg id="viewB" viewBox="0 0 240 240" role="img" aria-label="지금 거리에서 본 별의 모습"></svg>
+        <figcaption>
+          <div class="cap">별을 <b>지금 거리</b>에서 본 모습</div>
+          <div class="big num" id="bigm">겉보기 등급 m = +1.0</div>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="card controls">
+      <div class="ctl dctl">
+        <h2><span>① 별과의 거리 바꾸기</span><span class="read num"><span id="rD">-</span><small>pc</small></span></h2>
+        <input type="range" id="dSlider" min="0" max="3000" step="1" value="1700" aria-label="별까지의 거리(파섹)">
+        <div class="ticks" id="dTicks"></div>
+        <div class="btnrow" id="snapRow"></div>
+      </div>
+      <div class="ctl mctl">
+        <h2><span>② 별의 절대 등급 고르기</span><span class="read num"><span id="rM">-</span></span></h2>
+        <div class="btnrow" id="starChips" style="margin-bottom:6px"></div>
+        <input type="range" id="mSlider" min="-10" max="16" step="0.1" value="1" aria-label="절대 등급">
+        <p class="note" id="starNote"></p>
+        <div class="btnrow"><button class="btn small" id="goReal" hidden>📍 실제 거리로 이동</button></div>
+      </div>
+    </div>
+
+    <div class="card ruler">
+      <h2>📏 등급 눈금자 <span style="font-weight:400">(숫자가 작을수록 밝아요)</span></h2>
+      <svg id="rulerSvg" viewBox="0 0 800 130" role="img" aria-label="등급 눈금자"></svg>
+    </div>
+
+    <div class="card map">
+      <h2>🌌 별은 지구에서 얼마나 떨어져 있을까? <span style="font-weight:400">(눈금은 거리가 10배씩 커져요)</span></h2>
+      <svg id="mapSvg" viewBox="0 0 800 150" role="img" aria-label="지구와 별 사이의 거리를 나타낸 그림"></svg>
+    </div>
+  </section>
+
+  <aside class="side card" aria-label="학습 패널">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tabGuide" aria-selected="true" data-tab="guide">🔭 실험 가이드</button>
+      <button class="tab" role="tab" id="tabQuiz" aria-selected="false" data-tab="quiz">📝 문제 풀기</button>
+      <button class="tab" role="tab" id="tabConcept" aria-selected="false" data-tab="concept">📘 개념 정리</button>
+    </div>
+
+    <div class="panel" id="pGuide" role="tabpanel">
+      <h3>이렇게 실험해 봐요!</h3>
+      <p>슬라이더를 움직이면 아래 항목이 자동으로 체크돼요. ✔️</p>
+      <ul class="check" id="checkList"></ul>
+      <div class="prog" id="checkProg"></div>
+      <div class="think">💭 <b>생각해 보기</b><br>시리우스는 밤하늘에서 가장 밝게 보이지만, 리겔은 훨씬 멀리 있는데도 하늘에서 밝게 보여요. 둘 중 <b>진짜로 더 밝은 별</b>은 누구일까요? (힌트: 절대 등급!)</div>
+      <div style="margin-top:12px"><button class="btn primary" id="toQuiz">📝 문제 풀러 가기</button></div>
+    </div>
+
+    <div class="panel" id="pQuiz" role="tabpanel" hidden></div>
+
+    <div class="panel" id="pConcept" role="tabpanel" hidden>
+      <h3>핵심 개념 정리</h3>
+      <div class="card2"><b>등급</b> : 별의 밝기를 나타내는 숫자예요. <b>숫자가 작을수록 더 밝아요.</b> 1등급 차이는 약 2.5배, <b>5등급 차이는 정확히 100배</b>예요.</div>
+      <div class="card2"><b>겉보기 등급 (m)</b> : 지구에서 <b>눈으로 본 밝기</b>예요. 별이 멀수록 어둡게 보여요.</div>
+      <div class="card2"><span class="bb" style="font-weight:700">절대 등급 (M)</span> : 모든 별을 <b>10파섹(32.6광년)</b> 거리에 똑같이 놓았다고 가정했을 때의 밝기예요. 별의 <b>진짜 밝기</b>를 비교할 수 있어요.</div>
+      <div class="card2"><b>거리가 10배 멀어지면?</b><br>별빛은 <b>1/100</b>로 줄고, 등급은 <b>5등급</b> 커져요(더 어두워져요).</div>
+      <table class="rel">
+        <tr><th>m − M</th><th>별의 거리</th><th>의미</th></tr>
+        <tr><td>−5</td><td>1 pc</td><td>10pc보다 가까워서 더 밝게 보여요</td></tr>
+        <tr><td>0</td><td>10 pc</td><td>m = M (기준 거리)</td></tr>
+        <tr><td>+5</td><td>100 pc</td><td>10pc보다 멀어서 100배 어두워요</td></tr>
+        <tr><td>+10</td><td>1000 pc</td><td>10000배 어두워요</td></tr>
+      </table>
+      <details>
+        <summary>🔎 더 알아보기: 식으로 나타내면</summary>
+        <p>m − M = 5 log (d / 10) &nbsp;(d의 단위: 파섹)</p>
+        <p>중학교에서는 위 표처럼 <b>m − M 값으로 거리를 어림</b>하는 것으로 충분해요. 로그는 고등학교에서 배워요.</p>
+      </details>
+      <p class="note">1파섹(pc) ≈ 3.26광년</p>
+    </div>
+  </aside>
+</main>
+
+<script>
+(function(){
+'use strict';
+const VERSION = '1.1.0';
+const $ = id => document.getElementById(id);
+const NS = 'http://www.w3.org/2000/svg';
+const MINUS = '−';
+const LY_PER_PC = 3.26156;
+const M_LO = -16, M_HI = 27;           // 눈금자 범위
+const NAKED_EYE = 6;                    // 맨눈 한계 등급
+
+/* ---------- 계산 ---------- */
+const dOfV = v => Math.pow(10, v / 1000);                 // 슬라이더 값 → 거리(pc)
+const apparent = (M, d) => M + 5 * Math.log10(d / 10);    // 겉보기 등급
+const vOfD = d => Math.round(1000 * Math.log10(d));
+
+/* ---------- 표시 형식 ---------- */
+function fmtSigned(x, dec){
+  dec = (dec === undefined) ? 1 : dec;
+  const p = Math.pow(10, dec), r = Math.round(x * p) / p;
+  if (r === 0) return (0).toFixed(dec);
+  return (r > 0 ? '+' : MINUS) + Math.abs(r).toFixed(dec);
+}
+function fmtDist(d){
+  if (d < 10) return d.toFixed(2);
+  if (d < 100) return d.toFixed(1);
+  return Math.round(d).toLocaleString('ko-KR');
+}
+function fmtLy(ly){
+  if (ly < 100) return ly.toFixed(1);
+  return Math.round(ly).toLocaleString('ko-KR');
+}
+function fmtTimes(x){
+  if (x < 10) return x.toFixed(1);
+  return Math.round(x).toLocaleString('ko-KR');
+}
+
+/* ---------- 별 목록 ---------- */
+const STARS = [
+  {id:'custom', name:'직접 정하기'},
+  {id:'sun', name:'태양', M:4.8,
+   note:'태양의 절대 등급은 약 +4.8이에요. 하늘에서는 겉보기 등급이 약 −26.7로 가장 밝지만, 지구와 너무 가까워서일 뿐이에요.'},
+  {id:'sirius', name:'시리우스', M:1.4, realD:2.64,
+   note:'밤하늘에서 가장 밝게 보이는 별(겉보기 등급 약 −1.5). 지구에서 약 2.6pc로 가까워요.'},
+  {id:'rigel', name:'리겔', M:-7.0, realD:264,
+   note:'겉보기 등급은 약 +0.1이지만 약 260pc나 떨어진, 진짜로 아주 밝은 별이에요.'},
+  {id:'proxima', name:'프록시마', M:15.5, realD:1.3,
+   note:'태양 다음으로 가까운 별(약 1.3pc)인데도 겉보기 등급이 약 +11이라 맨눈으로는 안 보여요.'}
+];
+
+/* ---------- 상태 ---------- */
+const S = { v:1700, M:1.0, starId:'custom', mission:null, missionIdx:0 };
+const D = { at10:false, far:false, near:false, at100:false, star:false };   // 발견 체크
+const curD = () => dOfV(S.v);
+const curm = () => apparent(S.M, curD());
+
+/* ---------- 관측 화면(SVG) ---------- */
+function rng(seed){ let s = seed; return () => (s = (s * 1664525 + 1013904223) % 4294967296) / 4294967296; }
+function buildView(svg, uid, seed){
+  const r = rng(seed);
+  let dots = '';
+  for (let i = 0; i < 30; i++){
+    const x = 14 + r() * 212, y = 14 + r() * 212;
+    if (Math.hypot(x - 120, y - 120) < 30) continue;
+    dots += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(0.5 + r() * 0.8).toFixed(2)}" fill="#fff" opacity="${(0.25 + r() * 0.5).toFixed(2)}"/>`;
+  }
+  svg.innerHTML = `
+  <defs>
+    <radialGradient id="bg${uid}" cx="50%" cy="50%" r="70%"><stop offset="0" stop-color="#1a2468"/><stop offset="1" stop-color="#050a24"/></radialGradient>
+    <radialGradient id="gl${uid}"><stop offset="0" stop-color="#fff6c9" stop-opacity=".95"/><stop offset=".35" stop-color="#ffd24a" stop-opacity=".55"/><stop offset="1" stop-color="#ffd24a" stop-opacity="0"/></radialGradient>
+    <clipPath id="cp${uid}"><circle cx="120" cy="120" r="116"/></clipPath>
+  </defs>
+  <g clip-path="url(#cp${uid})">
+    <rect width="240" height="240" fill="url(#bg${uid})"/>
+    ${dots}
+    <g id="st${uid}" transform="translate(120 112)">
+      <circle id="gl_${uid}" r="10" fill="url(#gl${uid})"/>
+      <path id="sp_${uid}" d="" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
+      <circle id="co_${uid}" r="3" fill="#fff"/>
+    </g>
+  </g>
+  <circle cx="120" cy="120" r="116" fill="none" stroke="#3a4690" stroke-width="3"/>
+  <text id="msg_${uid}" x="120" y="208" text-anchor="middle" class="viewMsg"></text>`;
+}
+function setStar(uid, m){
+  let r, op;
+  if (m <= NAKED_EYE){ r = Math.min(2.4 + 2.1 * (NAKED_EYE - m), 46); op = 1; }
+  else { r = Math.max(1.4, 2.4 - 0.3 * (m - NAKED_EYE)); op = Math.max(0, 1 - (m - NAKED_EYE) / 5); }
+  $('st' + uid).setAttribute('opacity', op.toFixed(2));
+  $('gl_' + uid).setAttribute('r', Math.min(r * 3, 120).toFixed(1));
+  $('co_' + uid).setAttribute('r', Math.max(1.2, r * 0.55).toFixed(1));
+  const L = r * 2.6;
+  $('sp_' + uid).setAttribute('d', m < 3 ? `M${-L} 0H${L}M0 ${-L}V${L}` : '');
+  $('msg_' + uid).textContent = m > NAKED_EYE ? '맨눈으로는 안 보여요' : '';
+}
+
+/* ---------- 거리 위치도(SVG) ---------- */
+const xOfD = d => 110 + 600 * Math.log10(d) / 3;
+function starPoints(cx, cy, R, r){
+  const p = [];
+  for (let i = 0; i < 10; i++){
+    const ang = -Math.PI / 2 + i * Math.PI / 5, rad = i % 2 ? r : R;
+    p.push((cx + rad * Math.cos(ang)).toFixed(2) + ',' + (cy + rad * Math.sin(ang)).toFixed(2));
+  }
+  return p.join(' ');
+}
+function buildMap(){
+  const svg = $('mapSvg');
+  let t = '';
+  t += `<rect x="110" y="62" width="200" height="76" fill="#6cc4ff" opacity=".08"/>`;
+  t += `<line x1="110" y1="100" x2="710" y2="100" stroke="#5666c8" stroke-width="3" stroke-linecap="round"/>`;
+  [[1,'1 pc','3.26광년'],[10,'10 pc','32.6광년'],[100,'100 pc','326광년'],[1000,'1000 pc','3260광년']].forEach(a => {
+    const x = xOfD(a[0]);
+    t += `<line x1="${x}" y1="94" x2="${x}" y2="108" stroke="#8c97cf" stroke-width="2"/>`;
+    t += `<text x="${x}" y="126" text-anchor="middle" class="t-md">${a[1]}</text>`;
+    t += `<text x="${x}" y="144" text-anchor="middle" class="t-sm">${a[2]}</text>`;
+  });
+  t += `<line x1="310" y1="30" x2="310" y2="106" stroke="#6cc4ff" stroke-width="2" stroke-dasharray="5 4"/>`;
+  t += `<text x="310" y="20" text-anchor="middle" class="t-md t-blue">10파섹 (기준 거리)</text>`;
+  t += `<text x="210" y="48" text-anchor="middle" class="t-sm">← 가까움 (m &lt; M)</text>`;
+  t += `<text x="510" y="48" text-anchor="middle" class="t-sm">멀어짐 (m &gt; M) →</text>`;
+  t += `<circle cx="48" cy="100" r="17" fill="#2f7fd6"/><path d="M38 95q6-6 12-2t3 9q-6 4-12 1z" fill="#4fcf86"/><path d="M52 108q5-2 8 2-3 4-8 1z" fill="#4fcf86"/>`;
+  t += `<text x="48" y="136" text-anchor="middle" class="t-sm">지구</text>`;
+  t += `<line id="mapLine" x1="66" y1="100" x2="300" y2="100" stroke="#ffd24a" stroke-width="2" stroke-dasharray="3 5" opacity=".7"/>`;
+  t += `<g id="mapStar"><polygon points="${starPoints(0,0,14,6)}" fill="#ffd24a" stroke="#fff" stroke-width="1.5"/></g>`;
+  t += `<text id="mapLabel" x="300" y="76" text-anchor="middle" class="t-md t-gold"></text>`;
+  svg.innerHTML = t;
+}
+function renderMap(d){
+  const x = xOfD(d);
+  $('mapStar').setAttribute('transform', `translate(${x.toFixed(1)},100)`);
+  $('mapLine').setAttribute('x2', Math.max(x - 16, 70).toFixed(1));
+  const lab = $('mapLabel');
+  lab.setAttribute('x', Math.min(Math.max(x, 100), 720).toFixed(1));
+  lab.textContent = 'd = ' + fmtDist(d) + ' pc';
+}
+
+/* ---------- 등급 눈금자(SVG) ---------- */
+const xOfM = m => 30 + (Math.min(Math.max(m, M_LO), M_HI) - M_LO) / (M_HI - M_LO) * 740;
+function buildRuler(){
+  const svg = $('rulerSvg');
+  let t = '';
+  t += `<rect x="${xOfM(M_LO)}" y="58" width="${xOfM(NAKED_EYE) - xOfM(M_LO)}" height="5" fill="#3b4aa6" opacity=".7" rx="2"/>`;
+  t += `<line x1="30" y1="60" x2="770" y2="60" stroke="#5666c8" stroke-width="2"/>`;
+  for (let m = M_LO; m <= M_HI; m++){
+    const x = xOfM(m), major = (m % 5 === 0);
+    t += `<line x1="${x}" y1="60" x2="${x}" y2="${major ? 70 : 65}" stroke="#8c97cf" stroke-width="${major ? 2 : 1}"/>`;
+    if (major) t += `<text x="${x}" y="88" text-anchor="middle" class="t-sm">${m > 0 ? '+' + m : (m < 0 ? MINUS + Math.abs(m) : '0')}</text>`;
+  }
+  const x6 = xOfM(NAKED_EYE);
+  t += `<line x1="${x6}" y1="16" x2="${x6}" y2="60" stroke="#ffe9a0" stroke-width="1.5" stroke-dasharray="4 3"/>`;
+  t += `<text x="${x6 + 6}" y="12" class="t-sm" style="fill:#ffe9a0">맨눈 한계 +6</text>`;
+  t += `<text x="30" y="124" class="t-sm">← 밝음</text>`;
+  t += `<text x="770" y="124" text-anchor="end" class="t-sm">어두움 →</text>`;
+  t += `<line id="rSeg" x1="0" y1="60" x2="0" y2="60" stroke="#ffd24a" stroke-width="5" stroke-linecap="round" opacity=".85"/>`;
+  t += `<g id="rMark"><polygon points="-8,-14 8,-14 0,0" fill="#ffd24a" transform="translate(0,56)"/><text id="rmT" y="36" text-anchor="middle" class="t-md t-gold"></text></g>`;
+  t += `<g id="rMarkA"><polygon points="-8,14 8,14 0,0" fill="#6cc4ff" transform="translate(0,64)"/><text id="rMT" y="112" text-anchor="middle" class="t-md t-blue"></text></g>`;
+  svg.innerHTML = t;
+}
+function renderRuler(M, m){
+  const xm = xOfM(m), xM = xOfM(M);
+  const cl = x => Math.min(Math.max(x, 50), 750);
+  $('rMark').setAttribute('transform', `translate(${xm.toFixed(1)},0)`);
+  $('rMarkA').setAttribute('transform', `translate(${xM.toFixed(1)},0)`);
+  $('rmT').setAttribute('x', (cl(xm) - xm).toFixed(1));
+  $('rMT').setAttribute('x', (cl(xM) - xM).toFixed(1));
+  $('rmT').textContent = '겉보기 m ' + fmtSigned(m);
+  $('rMT').textContent = '절대 M ' + fmtSigned(M);
+  $('rSeg').setAttribute('x1', xM.toFixed(1));
+  $('rSeg').setAttribute('x2', xm.toFixed(1));
+}
+
+/* ---------- 전체 그리기 ---------- */
+function render(){
+  const d = curD(), M = S.M, m = curm(), diff = m - M;
+  $('dSlider').value = S.v;
+  $('mSlider').value = M;
+  $('rD').textContent = fmtDist(d);
+  $('rM').textContent = fmtSigned(M);
+  $('bigM').textContent = '절대 등급 M = ' + fmtSigned(M);
+  $('bigm').textContent = '겉보기 등급 m = ' + fmtSigned(m);
+  $('tD').textContent = fmtDist(d) + ' pc';
+  $('tLy').textContent = '약 ' + fmtLy(d * LY_PER_PC) + '광년';
+  $('tDiff').textContent = fmtSigned(diff);
+  let ds, rt;
+  const ratio = Math.pow(10 / d, 2);
+  if (Math.abs(S.v - 1000) < 1){ ds = '0이면 10pc예요'; rt = '똑같아요 (m = M)'; }
+  else if (d > 10){ ds = '+이면 10pc보다 멀어요'; rt = fmtTimes(1 / ratio) + '배 어둡게 보여요'; }
+  else { ds = '−이면 10pc보다 가까워요'; rt = fmtTimes(ratio) + '배 밝게 보여요'; }
+  $('tDiffS').textContent = ds;
+  $('tRatio').textContent = rt;
+  setStar('A', M);
+  setStar('B', m);
+  renderMap(d);
+  renderRuler(M, m);
+  renderChips();
+  renderMission();
+}
+
+/* ---------- 별 선택 ---------- */
+function renderChips(){
+  const box = $('starChips');
+  const locked = !!S.mission;
+  box.innerHTML = '';
+  STARS.forEach(s => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (S.starId === s.id ? ' on' : '');
+    b.disabled = locked;
+    b.dataset.id = s.id;
+    b.innerHTML = s.name + (s.M !== undefined ? ' <small>' + fmtSigned(s.M) + '</small>' : '');
+    box.appendChild(b);
+  });
+  $('mSlider').disabled = locked;
+  const st = STARS.find(s => s.id === S.starId);
+  let note = '';
+  if (locked) note = '🔒 미션 중에는 별의 절대 등급이 고정돼요. 거리만 움직여 보세요!';
+  else if (st && st.note) note = st.note;
+  else note = '슬라이더로 별의 진짜 밝기(절대 등급)를 직접 정해 보세요.';
+  $('starNote').textContent = note;
+  const real = !locked && st && st.realD;
+  $('goReal').hidden = !real;
+  if (real) $('goReal').textContent = '📍 실제 거리(약 ' + st.realD + 'pc)로 이동';
+}
+$('starChips').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b || b.disabled) return;
+  const st = STARS.find(s => s.id === b.dataset.id);
+  S.starId = st.id;
+  if (st.M !== undefined) S.M = st.M;
+  D.star = true; checkDiscover(); render();
+});
+$('mSlider').addEventListener('input', e => {
+  S.M = Math.round(parseFloat(e.target.value) * 10) / 10;
+  S.starId = 'custom'; D.star = true; checkDiscover(); render();
+});
+$('goReal').addEventListener('click', () => {
+  const st = STARS.find(s => s.id === S.starId);
+  if (st && st.realD){ S.v = vOfD(st.realD); checkDiscover(); render(); }
+});
+
+/* ---------- 거리 조작 ---------- */
+const SNAPS = [0, 1000, 2000, 3000];
+function snapV(v){ for (const s of SNAPS) if (Math.abs(v - s) <= 15) return s; return v; }
+(function buildDControls(){
+  const tk = $('dTicks');
+  [[0,'1'],[1000,'10'],[2000,'100'],[3000,'1000']].forEach(a => {
+    const sp = document.createElement('span');
+    sp.style.left = (a[0] / 30) + '%'; sp.textContent = a[1];
+    tk.appendChild(sp);
+  });
+  const row = $('snapRow');
+  [[0,'1 pc'],[1000,'10 pc'],[2000,'100 pc'],[3000,'1000 pc']].forEach(a => {
+    const b = document.createElement('button');
+    b.className = 'btn small'; b.textContent = a[1]; b.dataset.v = a[0];
+    row.appendChild(b);
+  });
+  row.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    S.v = parseInt(b.dataset.v, 10); checkDiscover(); render();
+  });
+})();
+$('dSlider').addEventListener('input', e => {
+  S.v = snapV(parseInt(e.target.value, 10));
+  checkDiscover(); render();
+});
+
+/* ---------- 발견 체크리스트 ---------- */
+const DISC = [
+  ['at10',  '거리를 <b>10pc</b>에 맞추면 두 화면이 똑같아져요 (m = M)'],
+  ['far',   '<b>10pc보다 멀리</b> 보내면 m이 M보다 커져요 (더 어두워요)'],
+  ['near',  '<b>10pc보다 가까이</b> 오면 m이 M보다 작아져요 (더 밝아요)'],
+  ['at100', '거리를 <b>100pc</b>에 맞추면 m − M = +5.0 이에요 (100배 어두워요)'],
+  ['star',  '<b>다른 별</b>이나 다른 절대 등급으로 바꿔서 실험해 봐요']
+];
+function checkDiscover(){
+  const d = curD();
+  if (Math.abs(d - 10) < 0.01) D.at10 = true;
+  if (d > 10.5) D.far = true;
+  if (d < 9.5) D.near = true;
+  if (Math.abs(d - 100) < 0.01) D.at100 = true;
+  renderCheck();
+}
+function renderCheck(){
+  const ul = $('checkList'); ul.innerHTML = '';
+  let n = 0;
+  DISC.forEach(a => {
+    const on = D[a[0]]; if (on) n++;
+    const li = document.createElement('li'); li.className = on ? 'done' : '';
+    li.innerHTML = '<span class="bx">' + (on ? '✔' : '') + '</span><span>' + a[1] + '</span>';
+    ul.appendChild(li);
+  });
+  $('checkProg').textContent = n === DISC.length ? '🎉 실험 미션 모두 완료! 이제 문제를 풀어 볼까요?' : n + ' / ' + DISC.length + ' 완료';
+}
+
+/* ---------- 미션(문제 연동) ---------- */
+function loadMission(mi){
+  S.mission = { target: mi.target, stars: mi.stars, text: mi.text };
+  S.missionIdx = 0;
+  S.starId = 'mission';
+  S.M = mi.stars[0].M;
+  S.v = 1500;
+  render();
+}
+function clearMission(){
+  S.mission = null; S.starId = 'custom'; render();
+}
+function renderMission(){
+  const el = $('mission');
+  if (!S.mission){ el.hidden = true; el.innerHTML = ''; return; }
+  const mis = S.mission, m = curm(), diff = m - mis.target, ok = Math.abs(diff) < 0.05;
+  el.hidden = false; el.className = 'mission' + (ok ? ' ok' : '');
+  let chips = '';
+  if (mis.stars.length > 1){
+    chips = '<div class="mchips">' + mis.stars.map((s, i) =>
+      `<button class="chip${i === S.missionIdx ? ' on' : ''}" data-i="${i}">${s.label} <small>M ${fmtSigned(s.M)}</small></button>`).join('') + '</div>';
+  }
+  const cur = mis.stars[S.missionIdx];
+  let stat;
+  if (ok) stat = `✅ 겉보기 등급이 <b>${fmtSigned(mis.target)}</b>이 됐어요! 이때의 <b>거리</b>를 읽어서 문제에 답해 보세요.`;
+  else if (diff > 0) stat = `지금 m = ${fmtSigned(m)} → 목표보다 ${diff.toFixed(1)}만큼 어두워요. 별을 <b>더 가깝게</b> 보내 볼까요?`;
+  else stat = `지금 m = ${fmtSigned(m)} → 목표보다 ${Math.abs(diff).toFixed(1)}만큼 밝아요. 별을 <b>더 멀리</b> 보내 볼까요?`;
+  el.innerHTML =
+    `<div class="mtxt">🎯 <b>미션</b> · ${cur.label}(절대 등급 ${fmtSigned(cur.M)}) — ${mis.text}</div>` +
+    `<button class="btn small ghost" id="endMission">미션 끝내기</button>` + chips +
+    `<div class="mstat">${stat}</div>`;
+}
+$('mission').addEventListener('click', e => {
+  if (e.target.closest('#endMission')){ clearMission(); return; }
+  const c = e.target.closest('.chip[data-i]');
+  if (c && S.mission){
+    S.missionIdx = parseInt(c.dataset.i, 10);
+    S.M = S.mission.stars[S.missionIdx].M;
+    render();
+  }
+});
+
+/* ---------- 문제 ---------- */
+const QUIZ = [
+  { title:'문제 1 · 기준 거리의 비밀',
+    text:'별 A의 <b>절대 등급은 +5.0</b>이고, <b>겉보기 등급도 +5.0</b>입니다. 별 A는 지구에서 얼마나 떨어져 있을까요?',
+    mission:{ target:5, stars:[{label:'별 A', M:5}], text:'겉보기 등급 m이 +5.0이 되는 거리를 찾아보세요.' },
+    choices:['1 pc','10 pc','100 pc','1000 pc'], answer:1,
+    hints:['실험실에 별 A를 불러온 뒤, 거리 슬라이더를 움직여서 겉보기 등급(m)이 +5.0이 되는 곳을 찾아보세요.',
+           'm과 M이 같다면 m − M = 0이에요. 표에서 m − M = 0일 때의 거리를 찾아보세요.'],
+    explain:'m − M = (+5.0) − (+5.0) = <b>0</b> → 별이 <b>10파섹</b> 거리에 있다는 뜻이에요. 절대 등급은 10파섹에서의 밝기니까, 겉보기 등급과 같다면 정확히 그 거리에 있는 거예요!' },
+  { title:'문제 2 · 멀리 있는 밝은 별',
+    text:'별 B의 <b>절대 등급은 −4.0</b>이고 <b>겉보기 등급은 +1.0</b>입니다. 별 B까지의 거리는 얼마일까요?',
+    mission:{ target:1, stars:[{label:'별 B', M:-4}], text:'겉보기 등급 m이 +1.0이 되는 거리를 찾아보세요.' },
+    choices:['1 pc','10 pc','100 pc','1000 pc'], answer:2,
+    hints:['실험실에서 별 B를 불러와 겉보기 등급(m)이 +1.0이 될 때까지 거리를 바꿔 보세요.',
+           'm − M = (+1.0) − (−4.0)을 계산해 보세요. 5등급 차이는 거리가 몇 배 달라졌다는 뜻일까요?'],
+    explain:'m − M = (+1.0) − (−4.0) = <b>+5.0</b> → 10파섹보다 멀어서 100배 어둡게 보이는 거예요. 거리가 10배 멀어지면 5등급 어두워지므로 별 B는 <b>100파섹</b>(약 326광년)에 있어요.' },
+  { title:'문제 3 · 똑같이 보이지만…',
+    text:'별 가, 나, 다는 지구에서 볼 때 모두 <b>겉보기 등급이 +3.0</b>으로 똑같이 밝게 보입니다. 절대 등급이 <b>가 +8.0 / 나 +3.0 / 다 −2.0</b>일 때, <b>가장 멀리 있는 별</b>은 누구일까요?',
+    mission:{ target:3, stars:[{label:'별 가', M:8},{label:'별 나', M:3},{label:'별 다', M:-2}], text:'세 별 모두 m이 +3.0이 되는 거리를 각각 찾아보세요.' },
+    choices:['별 가','별 나','별 다'], answer:2,
+    hints:['실험실에서 별 가, 나, 다를 차례로 불러와 m이 +3.0이 되는 거리를 각각 읽어 보세요.',
+           '세 별의 m − M을 각각 구해 보세요: 가 = −5, 나 = 0, 다 = +5. 어느 쪽이 가장 멀까요?'],
+    explain:'m − M은 가 = <b>−5</b>(1pc), 나 = <b>0</b>(10pc), 다 = <b>+5</b>(100pc)예요. 겉보기 밝기가 같아도 <b>진짜 밝은 별(절대 등급이 작은 별)일수록 더 멀리</b> 있을 수 있어요. 가장 먼 별은 <b>별 다</b>예요.' }
+];
+const Q = { i:0, sel:null, tries:[0,0,0], solved:[false,false,false], first:[false,false,false], done:false };
+
+function renderQuiz(loadLab){
+  const p = $('pQuiz');
+  if (Q.done){
+    const n = Q.first.filter(Boolean).length;
+    p.innerHTML = `<div class="result"><div>🎉 3문제를 모두 해결했어요!</div><div class="score">${n} / 3</div><div class="prog">첫 번째 시도에 맞힌 문제 수</div>
+      <ul>${QUIZ.map((q, i) => `<li>${q.title} — ${Q.first[i] ? '✅ 한 번에 정답' : '🔁 ' + Q.tries[i] + '번째에 정답'}</li>`).join('')}</ul>
+      <div class="qactions" style="justify-content:center"><button class="btn primary" id="qAgain">처음부터 다시 풀기</button><button class="btn" id="qFree">실험실에서 더 놀기</button></div></div>`;
+    return;
+  }
+  const q = QUIZ[Q.i];
+  const dots = QUIZ.map((_, i) => `<i class="${Q.solved[i] ? 'ok' : (i === Q.i ? 'cur' : '')}"></i>`).join('');
+  const solved = Q.solved[Q.i];
+  p.innerHTML =
+    `<div class="qhead"><p class="qtitle">${q.title}</p><div class="dots" aria-label="진행 상황">${dots}</div></div>` +
+    `<p class="qtext">${q.text}</p>` +
+    `<button class="btn small" id="qLoad">🔬 실험실에 별 불러오기</button>` +
+    `<div class="choices" role="radiogroup">` +
+    q.choices.map((c, i) => {
+      let cls = 'choice';
+      if (solved && i === q.answer) cls += ' right';
+      else if (Q.sel === i) cls += ' sel';
+      return `<button class="${cls}" data-i="${i}" ${solved ? 'disabled' : ''}>${'①②③④'[i]} ${c}</button>`;
+    }).join('') + `</div>` +
+    `<div class="fb" id="qFb" aria-live="polite"></div>` +
+    `<div class="qactions"><button class="btn primary" id="qCheck" ${solved ? 'hidden' : ''}>정답 확인</button>` +
+    `<button class="btn primary" id="qNext" ${solved ? '' : 'hidden'}>${Q.i === QUIZ.length - 1 ? '결과 보기' : '다음 문제 ▶'}</button></div>`;
+  if (solved) showExplain();
+  if (loadLab) loadMission(q.mission);
+}
+function showExplain(){
+  const q = QUIZ[Q.i];
+  $('qFb').innerHTML = `<span class="ok">⭕ 정답이에요!</span><span class="exp">${q.explain}</span>`;
+}
+$('pQuiz').addEventListener('click', e => {
+  const t = e.target;
+  if (t.closest('#qLoad')){ loadMission(QUIZ[Q.i].mission); return; }
+  const ch = t.closest('.choice');
+  if (ch && !ch.disabled){
+    Q.sel = parseInt(ch.dataset.i, 10);
+    $('pQuiz').querySelectorAll('.choice').forEach(b => b.classList.toggle('sel', parseInt(b.dataset.i, 10) === Q.sel));
+    $('qFb').innerHTML = '';
+    return;
+  }
+  if (t.closest('#qCheck')){
+    const q = QUIZ[Q.i];
+    if (Q.sel === null){ $('qFb').innerHTML = '<span class="hint">먼저 답을 골라 주세요 👆</span>'; return; }
+    Q.tries[Q.i]++;
+    if (Q.sel === q.answer){
+      Q.solved[Q.i] = true;
+      if (Q.tries[Q.i] === 1) Q.first[Q.i] = true;
+      renderQuiz(false);
+    } else {
+      const h = q.hints[Math.min(Q.tries[Q.i] - 1, q.hints.length - 1)];
+      const wrongBtn = $('pQuiz').querySelector('.choice.sel');
+      if (wrongBtn){ wrongBtn.classList.remove('sel'); wrongBtn.classList.add('wrong'); }
+      Q.sel = null;
+      $('qFb').innerHTML = `<span class="no">❌ 아쉬워요, 다시 도전!</span><span class="hint">💡 힌트: ${h}</span>`;
+      setTimeout(() => { const w = $('pQuiz').querySelector('.choice.wrong'); if (w) w.classList.remove('wrong'); }, 900);
+    }
+    return;
+  }
+  if (t.closest('#qNext')){
+    if (Q.i === QUIZ.length - 1){ Q.done = true; clearMission(); renderQuiz(false); }
+    else { Q.i++; Q.sel = null; renderQuiz(true); }
+    return;
+  }
+  if (t.closest('#qAgain')){
+    Q.i = 0; Q.sel = null; Q.tries = [0,0,0]; Q.solved = [false,false,false]; Q.first = [false,false,false]; Q.done = false;
+    renderQuiz(true); return;
+  }
+  if (t.closest('#qFree')){ clearMission(); showTab('guide'); }
+});
+
+/* ---------- 탭 ---------- */
+function showTab(name){
+  document.querySelectorAll('.tab').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
+  $('pGuide').hidden = name !== 'guide';
+  $('pQuiz').hidden = name !== 'quiz';
+  $('pConcept').hidden = name !== 'concept';
+  if (name === 'quiz' && !Q.done && !S.mission) loadMission(QUIZ[Q.i].mission);
+  if (name !== 'quiz' && S.mission && !Q.done) { /* 미션은 유지 — 끝내기 버튼으로 해제 */ }
+}
+document.querySelector('.tabs').addEventListener('click', e => {
+  const b = e.target.closest('.tab'); if (b) showTab(b.dataset.tab);
+});
+$('toQuiz').addEventListener('click', () => showTab('quiz'));
+
+/* ---------- 시작 ---------- */
+$('copy').textContent = '© 2026 MINARI STUDIO · v' + VERSION + ' · All rights reserved.';
+buildView($('viewA'), 'A', 11);
+buildView($('viewB'), 'B', 11);
+buildMap();
+buildRuler();
+renderCheck();
+renderQuiz(false);
+render();
+window.__lab = { S, Q, QUIZ, apparent, dOfV, vOfD, fmtSigned, fmtDist, loadMission, showTab };
+})();
+</script>
+</body>
+</html>
