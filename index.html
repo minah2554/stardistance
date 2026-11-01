@@ -100,6 +100,7 @@ h1{font-family:'Juache','Pretendard',sans-serif;font-weight:400;font-size:22px;m
 .mission .mstat{flex-basis:100%;font-size:14px;color:var(--muted)}
 .mission.ok .mstat{color:#bff5dc}
 .mchips{display:flex;gap:6px;flex-wrap:wrap}
+@media(min-width:1001px){#backQuiz{display:none}}
 
 /* 위치도·눈금자 */
 .map svg,.ruler svg{display:block;width:100%;height:auto}
@@ -313,7 +314,7 @@ summary{cursor:pointer;min-height:36px;display:flex;align-items:center}
 <script>
 (function(){
 'use strict';
-const VERSION = '1.1.0';
+const VERSION = '1.2.0';
 const $ = id => document.getElementById(id);
 const NS = 'http://www.w3.org/2000/svg';
 const MINUS = '−';
@@ -605,6 +606,7 @@ function renderCheck(){
 
 /* ---------- 미션(문제 연동) ---------- */
 function loadMission(mi){
+  if (!S.mission) S.saved = { v: S.v, M: S.M, starId: S.starId };   // 미션이 끝나면 하던 실험으로 돌아가기
   S.mission = { target: mi.target, stars: mi.stars, text: mi.text };
   S.missionIdx = 0;
   S.starId = 'mission';
@@ -613,8 +615,13 @@ function loadMission(mi){
   render();
 }
 function clearMission(){
-  S.mission = null; S.starId = 'custom'; render();
+  if (!S.mission) return;
+  S.mission = null;
+  if (S.saved){ S.v = S.saved.v; S.M = S.saved.M; S.starId = S.saved.starId; S.saved = null; }
+  else S.starId = 'custom';
+  render();
 }
+const narrow = () => matchMedia('(max-width:1000px)').matches;   // 실험실과 문제가 위아래로 쌓이는 화면
 function renderMission(){
   const el = $('mission');
   if (!S.mission){ el.hidden = true; el.innerHTML = ''; return; }
@@ -632,11 +639,13 @@ function renderMission(){
   else stat = `지금 m = ${fmtSigned(m)} → 목표보다 ${Math.abs(diff).toFixed(1)}만큼 밝아요. 별을 <b>더 멀리</b> 보내 볼까요?`;
   el.innerHTML =
     `<div class="mtxt">🎯 <b>미션</b> · ${cur.label}(절대 등급 ${fmtSigned(cur.M)}) — ${mis.text}</div>` +
-    `<button class="btn small ghost" id="endMission">미션 끝내기</button>` + chips +
+    `<button class="btn small ghost" id="endMission">미션 끝내기</button>` +
+    `<button class="btn small ghost" id="backQuiz">📝 문제로 돌아가기</button>` + chips +
     `<div class="mstat">${stat}</div>`;
 }
 $('mission').addEventListener('click', e => {
   if (e.target.closest('#endMission')){ clearMission(); return; }
+  if (e.target.closest('#backQuiz')){ $('pQuiz').scrollIntoView({ block: 'start', behavior: 'smooth' }); return; }
   const c = e.target.closest('.chip[data-i]');
   if (c && S.mission){
     S.missionIdx = parseInt(c.dataset.i, 10);
@@ -686,7 +695,7 @@ function renderQuiz(loadLab){
   p.innerHTML =
     `<div class="qhead"><p class="qtitle">${q.title}</p><div class="dots" aria-label="진행 상황">${dots}</div></div>` +
     `<p class="qtext">${q.text}</p>` +
-    `<button class="btn small" id="qLoad">🔬 실험실에 별 불러오기</button>` +
+    `<button class="btn" id="qLoad">🔬 실험실에 별 불러오기</button>` +
     `<div class="choices" role="radiogroup">` +
     q.choices.map((c, i) => {
       let cls = 'choice';
@@ -706,7 +715,11 @@ function showExplain(){
 }
 $('pQuiz').addEventListener('click', e => {
   const t = e.target;
-  if (t.closest('#qLoad')){ loadMission(QUIZ[Q.i].mission); return; }
+  if (t.closest('#qLoad')){
+    loadMission(QUIZ[Q.i].mission);
+    if (narrow()) $('mission').scrollIntoView({ block: 'start', behavior: 'smooth' });
+    return;
+  }
   const ch = t.closest('.choice');
   if (ch && !ch.disabled){
     Q.sel = parseInt(ch.dataset.i, 10);
@@ -734,12 +747,12 @@ $('pQuiz').addEventListener('click', e => {
   }
   if (t.closest('#qNext')){
     if (Q.i === QUIZ.length - 1){ Q.done = true; clearMission(); renderQuiz(false); }
-    else { Q.i++; Q.sel = null; renderQuiz(true); }
+    else { Q.i++; Q.sel = null; renderQuiz(!!S.mission); }
     return;
   }
   if (t.closest('#qAgain')){
     Q.i = 0; Q.sel = null; Q.tries = [0,0,0]; Q.solved = [false,false,false]; Q.first = [false,false,false]; Q.done = false;
-    renderQuiz(true); return;
+    renderQuiz(false); return;
   }
   if (t.closest('#qFree')){ clearMission(); showTab('guide'); }
 });
@@ -750,8 +763,8 @@ function showTab(name){
   $('pGuide').hidden = name !== 'guide';
   $('pQuiz').hidden = name !== 'quiz';
   $('pConcept').hidden = name !== 'concept';
-  if (name === 'quiz' && !Q.done && !S.mission) loadMission(QUIZ[Q.i].mission);
-  if (name !== 'quiz' && S.mission && !Q.done) { /* 미션은 유지 — 끝내기 버튼으로 해제 */ }
+  // 문제 탭을 열기만 해서는 실험을 바꾸지 않고, 문제 탭을 떠나면 미션을 끝내요
+  if (name !== 'quiz') clearMission();
 }
 document.querySelector('.tabs').addEventListener('click', e => {
   const b = e.target.closest('.tab'); if (b) showTab(b.dataset.tab);
