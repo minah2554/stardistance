@@ -201,6 +201,13 @@ input[type=range]:disabled{opacity:.45}
 .check li .bx{flex:0 0 24px;height:24px;border-radius:7px;border:2px solid #5666c8;display:grid;place-items:center;font-size:15px;color:#06203a;font-weight:800}
 .check li.done{border-color:var(--green);background:#12384a}
 .check li.done .bx{background:var(--green);border-color:var(--green)}
+.check li.now{border-color:var(--gold);border-width:1.5px}
+.check .tag{display:block;font-size:13px;font-weight:700;color:var(--gold);margin-bottom:2px}
+.check .sub{display:block;font-size:14px;color:var(--muted);margin-top:2px}
+.check li.done .sub{color:#bff5dc}
+.nw{white-space:nowrap}
+/* 한글이 글자 중간에서 줄바꿈되지 않게 */
+.panel,.help-body,.mission,.note{word-break:keep-all;overflow-wrap:anywhere}
 .prog{font-size:13px;color:var(--muted)}
 .think{background:#2a2150;border:1px solid #5b4aa8;border-radius:12px;padding:10px 12px;margin-top:10px;font-size:14px}
 .card2{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:8px 0}
@@ -261,8 +268,8 @@ summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
           <li><b>① 거리 슬라이더</b>의 동그란 손잡이를 옆으로 밀거나 <b>1 · 10 · 100 · 1000 pc 버튼</b>을 눌러 별을 옮겨요.</li>
           <li><b>② 별 버튼</b>(태양, 시리우스, 리겔, 프록시마)을 누르거나 등급 슬라이더를 밀어서 별의 진짜 밝기(M)를 정해요.</li>
           <li>두 그림을 비교해요. <b>왼쪽</b>은 별을 10pc에 놓은 모습(<span class="tM">M</span>), <b>오른쪽</b>은 지금 거리에서 본 모습(<span class="tm">m</span>)이에요. 가운데 숫자 <b>m − M</b>을 보면 별이 10pc보다 가까운지 먼지 알 수 있어요.</li>
-          <li>그 아래 <b>등급 눈금자</b>와 <b>거리 지도</b>에서 별의 위치를 확인해요.</li>
-          <li><b>🔭 실험 가이드</b>의 체크리스트를 채운 뒤, <b>📝 문제 풀기</b>에서 <b>🔬 실험실에 별 불러오기</b>를 눌러 미션으로 문제를 풀어요.</li>
+          <li>슬라이더 위의 <b>거리 지도</b>와 맨 아래 <b>등급 눈금자</b>에서 별의 위치를 확인해요.</li>
+          <li><b>🔭 실험 가이드</b>의 체크리스트를 위에서부터 차례로 채운 뒤, <b>📝 문제 풀기</b>에서 <b>🔬 실험실에 별 불러오기</b>를 눌러 미션으로 문제를 풀어요.</li>
         </ol>
       </section>
     </div>
@@ -298,6 +305,11 @@ summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
       </figure>
     </div>
 
+    <div class="card map">
+      <h2>🌌 별은 지구에서 얼마나 떨어져 있을까? <span style="font-weight:400">(눈금은 거리가 10배씩 커져요)</span></h2>
+      <svg id="mapSvg" viewBox="0 0 800 150" role="img" aria-label="지구와 별 사이의 거리를 나타낸 그림"></svg>
+    </div>
+
     <div class="card controls">
       <div class="ctl dctl">
         <h2><span>① 별과의 거리 바꾸기</span><span class="read num"><span id="rD">-</span><small>pc</small></span></h2>
@@ -318,11 +330,6 @@ summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
       <h2>📏 등급 눈금자 <span style="font-weight:400">(숫자가 작을수록 밝아요)</span></h2>
       <svg id="rulerSvg" viewBox="0 0 800 130" role="img" aria-label="등급 눈금자"></svg>
     </div>
-
-    <div class="card map">
-      <h2>🌌 별은 지구에서 얼마나 떨어져 있을까? <span style="font-weight:400">(눈금은 거리가 10배씩 커져요)</span></h2>
-      <svg id="mapSvg" viewBox="0 0 800 150" role="img" aria-label="지구와 별 사이의 거리를 나타낸 그림"></svg>
-    </div>
   </section>
 
   <aside class="side card" aria-label="학습 패널">
@@ -334,9 +341,9 @@ summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
 
     <div class="panel" id="pGuide" role="tabpanel" aria-labelledby="tabGuide">
       <h3>이렇게 실험해 봐요!</h3>
-      <p>슬라이더를 움직이면 아래 항목이 자동으로 체크돼요. ✔️</p>
+      <p>위에서부터 <b>한 단계씩</b> 해 봐요. 슬라이더에서 <b>손을 떼면</b> 맞게 했는지 확인하고 체크돼요. ✔️</p>
       <ul class="check" id="checkList"></ul>
-      <div class="prog" id="checkProg"></div>
+      <div class="prog" id="checkProg" aria-live="polite"></div>
       <div class="think">💭 <b>생각해 보기</b><br>시리우스는 밤하늘에서 가장 밝게 보이지만, 리겔은 훨씬 멀리 있는데도 하늘에서 밝게 보여요. 둘 중 <b>진짜로 더 밝은 별</b>은 누구일까요? (힌트: 절대 등급!)</div>
       <div style="margin-top:12px"><button class="btn primary" id="toQuiz">📝 문제 풀러 가기</button></div>
     </div>
@@ -371,7 +378,7 @@ summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
 <script>
 (function(){
 'use strict';
-const VERSION = '1.7.0';
+const VERSION = '1.8.0';
 const $ = id => document.getElementById(id);
 const NS = 'http://www.w3.org/2000/svg';
 const MINUS = '−';
@@ -420,7 +427,7 @@ const STARS = [
 
 /* ---------- 상태 ---------- */
 const S = { v:1700, M:1.0, starId:'custom', mission:null, missionIdx:0 };
-const D = { at10:false, far:false, near:false, at100:false, star:false };   // 발견 체크
+const D = { at10:false, far:false, near:false, at100:false, star:false, M0:null };   // 발견 체크
 const curD = () => dOfV(S.v);
 const curm = () => apparent(S.M, curD());
 
@@ -601,15 +608,16 @@ $('starChips').addEventListener('click', e => {
   const st = STARS.find(s => s.id === b.dataset.id);
   S.starId = st.id;
   if (st.M !== undefined) S.M = st.M;
-  D.star = true; checkDiscover(); render();
+  checkDiscover('star'); render();
 });
 $('mSlider').addEventListener('input', e => {
   S.M = Math.round(parseFloat(e.target.value) * 10) / 10;
-  S.starId = 'custom'; D.star = true; checkDiscover(); render();
+  S.starId = 'custom'; render();
 });
+$('mSlider').addEventListener('change', () => checkDiscover('star'));
 $('goReal').addEventListener('click', () => {
   const st = STARS.find(s => s.id === S.starId);
-  if (st && st.realD){ S.v = vOfD(st.realD); checkDiscover(); render(); }
+  if (st && st.realD){ S.v = vOfD(st.realD); checkDiscover('d'); render(); }
 });
 
 /* ---------- 거리 조작 ---------- */
@@ -630,40 +638,49 @@ function snapV(v){ for (const s of SNAPS) if (Math.abs(v - s) <= 15) return s; r
   });
   row.addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;
-    S.v = parseInt(b.dataset.v, 10); checkDiscover(); render();
+    S.v = parseInt(b.dataset.v, 10); checkDiscover('d'); render();
   });
 })();
 $('dSlider').addEventListener('input', e => {
   S.v = snapV(parseInt(e.target.value, 10));
-  checkDiscover(); render();
+  render();
 });
+$('dSlider').addEventListener('change', () => checkDiscover('d'));
 
 /* ---------- 발견 체크리스트 ---------- */
 const DISC = [
-  ['at10',  '거리를 <b>10pc</b>에 맞추면 두 화면이 똑같아져요 (m = M)'],
-  ['far',   '<b>10pc보다 멀리</b> 보내면 m이 M보다 커져요 (더 어두워요)'],
-  ['near',  '<b>10pc보다 가까이</b> 오면 m이 M보다 작아져요 (더 밝아요)'],
-  ['at100', '거리를 <b>100pc</b>에 맞추면 m − M = +5.0 이에요 (100배 어두워요)'],
-  ['star',  '<b>다른 별</b>이나 다른 절대 등급으로 바꿔서 실험해 봐요']
+  ['at10',  '거리를 <b>10pc</b>에 맞춰요', '두 화면이 똑같아져요 <span class="nw">(m = M)</span>'],
+  ['far',   '별을 <b>10pc보다 멀리</b> 보내요', 'm이 M보다 커져요 <span class="nw">(더 어두워요)</span>'],
+  ['near',  '별을 <b>10pc보다 가까이</b> 가져와요', 'm이 M보다 작아져요 <span class="nw">(더 밝아요)</span>'],
+  ['at100', '거리를 <b>100pc</b>에 맞춰요', '<span class="nw">m − M = +5.0</span> <span class="nw">(100배 어두워요)</span>'],
+  ['star',  '<b>다른 별</b>이나 <b>다른 절대 등급</b>으로 바꿔요', '같은 거리라도 별마다 밝기가 달라요']
 ];
-function checkDiscover(){
+// 체크는 위에서부터 한 단계씩, 학생이 조작을 끝냈을 때(슬라이더에서 손을 뗄 때)만 확인해요
+function checkDiscover(kind){
+  const k = DISC.find(a => !D[a[0]]);
+  if (!k) return;
   const d = curD();
-  if (Math.abs(d - 10) < 0.01) D.at10 = true;
-  if (d > 10.5) D.far = true;
-  if (d < 9.5) D.near = true;
-  if (Math.abs(d - 100) < 0.01) D.at100 = true;
-  renderCheck();
+  const ok = kind === 'd'
+    ? { at10: Math.abs(d - 10) < 0.01, far: d > 10.5, near: d < 9.5, at100: Math.abs(d - 100) < 0.01 }[k[0]]
+    : kind === 'star' && k[0] === 'star' && S.M !== D.M0;
+  if (!ok) return;
+  D[k[0]] = true;
+  if (k[0] === 'at100') D.M0 = S.M;
+  renderCheck(true);
 }
-function renderCheck(){
+function renderCheck(justDone){
   const ul = $('checkList'); ul.innerHTML = '';
-  let n = 0;
+  let n = 0, cur = false;
   DISC.forEach(a => {
     const on = D[a[0]]; if (on) n++;
-    const li = document.createElement('li'); li.className = on ? 'done' : '';
-    li.innerHTML = '<span class="bx">' + (on ? '✔' : '') + '</span><span>' + a[1] + '</span>';
+    const now = !on && !cur; if (now) cur = true;
+    const li = document.createElement('li'); li.className = on ? 'done' : (now ? 'now' : '');
+    li.innerHTML = '<span class="bx">' + (on ? '✔' : '') + '</span><span>' + (now ? '<span class="tag">👉 지금 해 볼 것</span>' : '') +
+      a[1] + '<span class="sub">→ ' + a[2] + '</span></span>';
     ul.appendChild(li);
   });
-  $('checkProg').textContent = n === DISC.length ? '🎉 실험 미션 모두 완료! 이제 문제를 풀어 볼까요?' : n + ' / ' + DISC.length + ' 완료';
+  $('checkProg').textContent = n === DISC.length ? '🎉 실험 미션 모두 완료! 이제 문제를 풀어 볼까요?'
+    : (justDone ? '✔ 잘했어요! ' : '') + n + ' / ' + DISC.length + ' 완료';
 }
 
 /* ---------- 미션(문제 연동) ---------- */
