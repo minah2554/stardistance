@@ -73,6 +73,7 @@ body{
   background:radial-gradient(1200px 600px at 80% -10%,#1a2468 0%,transparent 60%),var(--bg);
 }
 button,select,input,textarea{font-family:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 svg text{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-variant-numeric:tabular-nums}
 
 /* 헤더 */
@@ -138,7 +139,7 @@ h1{font-family:'Juache','Pretendard',sans-serif;font-weight:400;font-size:22px;m
 .ctl .read{font-size:22px;font-weight:700;color:var(--gold)}
 .ctl.mctl .read{color:var(--blue)}
 .ctl .read small{font-size:13px;color:var(--muted);font-weight:500;margin-left:4px}
-input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:36px;background:transparent;margin:0;touch-action:none}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;margin:0;touch-action:none}
 input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(90deg,#33408f,#6b7be0)}
 input[type=range]::-moz-range-track{height:8px;border-radius:4px;background:linear-gradient(90deg,#33408f,#6b7be0)}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:var(--gold);border:3px solid #fff;margin-top:-11px;box-shadow:0 2px 6px #0008}
@@ -155,8 +156,8 @@ input[type=range]:disabled{opacity:.45}
 .btn.primary{background:var(--gold);color:#201a00;border-color:var(--gold)}
 .btn.primary:disabled{opacity:.4;cursor:not-allowed}
 .btn.ghost{background:transparent}
-.btn.small{min-height:38px;padding:4px 12px;font-size:14px}
-.chip{min-height:40px;padding:4px 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--panel2);color:var(--text);font-size:14px;font-weight:600;cursor:pointer}
+.btn.small{min-height:44px;padding:4px 12px;font-size:14px}
+.chip{min-height:44px;padding:4px 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--panel2);color:var(--text);font-size:14px;font-weight:600;cursor:pointer}
 .chip small{color:var(--muted);font-weight:500;margin-left:2px}
 .chip.on{background:var(--blue);color:#06203a;border-color:var(--blue)}
 .chip.on small{color:#0a3358}
@@ -184,7 +185,7 @@ table.rel{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
 table.rel th,table.rel td{border:1px solid var(--line);padding:6px 8px;text-align:center}
 table.rel th{background:var(--panel2);color:var(--muted);font-weight:600}
 details{margin-top:10px;font-size:14px;color:var(--muted)}
-summary{cursor:pointer;min-height:36px;display:flex;align-items:center}
+summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
 
 /* 퀴즈 */
 .qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
@@ -275,13 +276,13 @@ summary{cursor:pointer;min-height:36px;display:flex;align-items:center}
   </section>
 
   <aside class="side card" aria-label="학습 패널">
-    <div class="tabs" role="tablist">
-      <button class="tab" role="tab" id="tabGuide" aria-selected="true" data-tab="guide">🔭 실험 가이드</button>
-      <button class="tab" role="tab" id="tabQuiz" aria-selected="false" data-tab="quiz">📝 문제 풀기</button>
-      <button class="tab" role="tab" id="tabConcept" aria-selected="false" data-tab="concept">📘 개념 정리</button>
+    <div class="tabs" role="tablist" aria-label="학습 패널">
+      <button class="tab" role="tab" id="tabGuide" aria-selected="true" aria-controls="pGuide" data-tab="guide">🔭 실험 가이드</button>
+      <button class="tab" role="tab" id="tabQuiz" aria-selected="false" aria-controls="pQuiz" tabindex="-1" data-tab="quiz">📝 문제 풀기</button>
+      <button class="tab" role="tab" id="tabConcept" aria-selected="false" aria-controls="pConcept" tabindex="-1" data-tab="concept">📘 개념 정리</button>
     </div>
 
-    <div class="panel" id="pGuide" role="tabpanel">
+    <div class="panel" id="pGuide" role="tabpanel" aria-labelledby="tabGuide">
       <h3>이렇게 실험해 봐요!</h3>
       <p>슬라이더를 움직이면 아래 항목이 자동으로 체크돼요. ✔️</p>
       <ul class="check" id="checkList"></ul>
@@ -290,9 +291,9 @@ summary{cursor:pointer;min-height:36px;display:flex;align-items:center}
       <div style="margin-top:12px"><button class="btn primary" id="toQuiz">📝 문제 풀러 가기</button></div>
     </div>
 
-    <div class="panel" id="pQuiz" role="tabpanel" hidden></div>
+    <div class="panel" id="pQuiz" role="tabpanel" aria-labelledby="tabQuiz" hidden></div>
 
-    <div class="panel" id="pConcept" role="tabpanel" hidden>
+    <div class="panel" id="pConcept" role="tabpanel" aria-labelledby="tabConcept" hidden>
       <h3>핵심 개념 정리</h3>
       <div class="card2"><b>등급</b> : 별의 밝기를 나타내는 숫자예요. <b>숫자가 작을수록 더 밝아요.</b> 1등급 차이는 약 2.5배, <b>5등급 차이는 정확히 100배</b>예요.</div>
       <div class="card2"><b>겉보기 등급 (m)</b> : 지구에서 <b>눈으로 본 밝기</b>예요. 별이 멀수록 어둡게 보여요.</div>
@@ -318,7 +319,7 @@ summary{cursor:pointer;min-height:36px;display:flex;align-items:center}
 <script>
 (function(){
 'use strict';
-const VERSION = '1.4.0';
+const VERSION = '1.5.0';
 const $ = id => document.getElementById(id);
 const NS = 'http://www.w3.org/2000/svg';
 const MINUS = '−';
@@ -518,14 +519,19 @@ function render(){
 function renderChips(){
   const box = $('starChips');
   const locked = !!S.mission;
-  box.innerHTML = '';
-  STARS.forEach(s => {
+  // 버튼은 한 번만 만들고 상태만 바꿔요 (다시 만들면 키보드 포커스가 사라져요)
+  if (!box.children.length) STARS.forEach(s => {
     const b = document.createElement('button');
-    b.className = 'chip' + (S.starId === s.id ? ' on' : '');
-    b.disabled = locked;
+    b.className = 'chip';
     b.dataset.id = s.id;
     b.innerHTML = s.name + (s.M !== undefined ? ' <small>' + fmtSigned(s.M) + '</small>' : '');
     box.appendChild(b);
+  });
+  [...box.children].forEach(b => {
+    const on = S.starId === b.dataset.id;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', String(on));
+    b.disabled = locked;
   });
   $('mSlider').disabled = locked;
   const st = STARS.find(s => s.id === S.starId);
@@ -634,7 +640,7 @@ function renderMission(){
   let chips = '';
   if (mis.stars.length > 1){
     chips = '<div class="mchips">' + mis.stars.map((s, i) =>
-      `<button class="chip${i === S.missionIdx ? ' on' : ''}" data-i="${i}">${s.label} <small>M ${fmtSigned(s.M)}</small></button>`).join('') + '</div>';
+      `<button class="chip${i === S.missionIdx ? ' on' : ''}" data-i="${i}" aria-pressed="${i === S.missionIdx}">${s.label} <small>M ${fmtSigned(s.M)}</small></button>`).join('') + '</div>';
   }
   const cur = mis.stars[S.missionIdx];
   let stat;
@@ -655,6 +661,7 @@ $('mission').addEventListener('click', e => {
     S.missionIdx = parseInt(c.dataset.i, 10);
     S.M = S.mission.stars[S.missionIdx].M;
     render();
+    $('mission').querySelector(`.chip[data-i="${S.missionIdx}"]`).focus();
   }
 });
 
@@ -698,16 +705,16 @@ function renderQuiz(loadLab){
   const solved = Q.solved[Q.i];
   p.innerHTML =
     `<div class="qhead"><p class="qtitle">${q.title}</p><div class="dots" aria-label="진행 상황">${dots}</div></div>` +
-    `<p class="qtext">${q.text}</p>` +
+    `<p class="qtext" tabindex="-1">${q.text}</p>` +
     `<button class="btn" id="qLoad">🔬 실험실에 별 불러오기</button>` +
-    `<div class="choices" role="radiogroup">` +
+    `<div class="choices" role="group" aria-label="보기">` +
     q.choices.map((c, i) => {
       let cls = 'choice';
       const wrong = Q.wrong[Q.i].includes(i);
       if (solved && i === q.answer) cls += ' right';
       else if (wrong) cls += ' wrong';
       else if (Q.sel === i) cls += ' sel';
-      return `<button class="${cls}" data-i="${i}" ${solved || wrong ? 'disabled' : ''}>${'①②③④'[i]} ${c}${wrong ? ' ✗' : ''}</button>`;
+      return `<button class="${cls}" data-i="${i}" aria-pressed="${Q.sel === i}" ${solved || wrong ? 'disabled' : ''}>${'①②③④'[i]} ${c}${wrong ? ' ✗' : ''}</button>`;
     }).join('') + `</div>` +
     `<div class="fb" id="qFb" aria-live="polite"></div>` +
     `<div class="qactions"><button class="btn primary" id="qCheck" ${solved ? 'hidden' : ''}>정답 확인</button>` +
@@ -729,7 +736,10 @@ $('pQuiz').addEventListener('click', e => {
   const ch = t.closest('.choice');
   if (ch && !ch.disabled){
     Q.sel = parseInt(ch.dataset.i, 10);
-    $('pQuiz').querySelectorAll('.choice').forEach(b => b.classList.toggle('sel', parseInt(b.dataset.i, 10) === Q.sel));
+    $('pQuiz').querySelectorAll('.choice').forEach(b => {
+      const on = parseInt(b.dataset.i, 10) === Q.sel;
+      b.classList.toggle('sel', on); b.setAttribute('aria-pressed', String(on));
+    });
     $('qFb').innerHTML = '';
     return;
   }
@@ -741,6 +751,7 @@ $('pQuiz').addEventListener('click', e => {
       Q.solved[Q.i] = true;
       if (Q.tries[Q.i] === 1) Q.first[Q.i] = true;
       renderQuiz(false);
+      $('qNext').focus();
     } else {
       let h = q.hints[Math.min(Q.tries[Q.i] - 1, q.hints.length - 1)];
       if (!S.mission) h = '먼저 <b>🔬 실험실에 별 불러오기</b>를 눌러요. ' + h;
@@ -748,12 +759,13 @@ $('pQuiz').addEventListener('click', e => {
       Q.sel = null;
       renderQuiz(false);
       $('qFb').innerHTML = `<span class="no">❌ 아쉬워요, 다시 도전!</span><span class="hint">💡 힌트: ${h}</span>`;
+      $('pQuiz').querySelector('.choice:not(:disabled)').focus();
     }
     return;
   }
   if (t.closest('#qNext')){
-    if (Q.i === QUIZ.length - 1){ Q.done = true; clearMission(); renderQuiz(false); }
-    else { Q.i++; Q.sel = null; renderQuiz(!!S.mission); }
+    if (Q.i === QUIZ.length - 1){ Q.done = true; clearMission(); renderQuiz(false); $('qAgain').focus(); }
+    else { Q.i++; Q.sel = null; renderQuiz(!!S.mission); $('pQuiz').querySelector('.qtext').focus(); }
     return;
   }
   if (t.closest('#qAgain')){
@@ -765,7 +777,10 @@ $('pQuiz').addEventListener('click', e => {
 
 /* ---------- 탭 ---------- */
 function showTab(name){
-  document.querySelectorAll('.tab').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
+  document.querySelectorAll('.tab').forEach(b => {
+    const on = b.dataset.tab === name;
+    b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1;
+  });
   $('pGuide').hidden = name !== 'guide';
   $('pQuiz').hidden = name !== 'quiz';
   $('pConcept').hidden = name !== 'concept';
@@ -774,6 +789,14 @@ function showTab(name){
 }
 document.querySelector('.tabs').addEventListener('click', e => {
   const b = e.target.closest('.tab'); if (b) showTab(b.dataset.tab);
+});
+document.querySelector('.tabs').addEventListener('keydown', e => {
+  const tabs = [...document.querySelectorAll('.tab')], i = tabs.indexOf(document.activeElement);
+  const k = { ArrowRight: 1, ArrowLeft: -1, Home: -i, End: tabs.length - 1 - i }[e.key];
+  if (i < 0 || k === undefined) return;
+  e.preventDefault();
+  const t = tabs[(i + k + tabs.length) % tabs.length];
+  showTab(t.dataset.tab); t.focus();
 });
 $('toQuiz').addEventListener('click', () => showTab('quiz'));
 
